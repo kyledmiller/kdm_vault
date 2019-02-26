@@ -17,36 +17,10 @@ module load python
 cd $PBS_O_WORKDIR
 #cp POSCAR POSCAR.orig
 
-#module load mpi/intel-mpi-4.1.0
-
 #ulimit -s unlimited
 #nprocs=`wc -l $PBS_NODEFILE | awk '{ print $1 }'`
 echo $PBS_NODEFILE
 
-#prefix1=rlx.out
-
-#for it in 1 2 3
-#do
-#cp INCAR.is7.ib2 INCAR
-#mpirun /projects/b1027/VASPmod.5.4.4/vasp_std > "$prefix1".is7.ib2.$it
-#cp CONTCAR POSCAR
-
-#cp INCAR.is7.ib1 INCAR
-#mpirun /projects/b1027/VASPmod.5.4.4/vasp_std  > "$prefix1".is7.ib1.$it
-#cp CONTCAR POSCAR
-
-#cp INCAR.is2.ib2 INCAR
-#mpirun /projects/b1027/VASPmod.5.4.4/vasp_std > "$prefix1".is2.ib2.$it
-#cp CONTCAR POSCAR
-
-#cp INCAR.is2.ib1 INCAR
-#mpirun /projects/b1027/VASPmod.5.4.4/vasp_std  > "$prefix1".is2.ib1.$it
-#cp CONTCAR POSCAR
-#done
-
 #Standard static calc and DOS calc
-#cp INCAR.estruc INCAR
 mpirun /projects/b1027/VASPmod.5.4.4/vasp_std > static-out.std
-#cp INCAR.dos INCAR
-#mpirun /projects/b1027/VASPmod.5.4.4/vasp_std > static-out.dos
 

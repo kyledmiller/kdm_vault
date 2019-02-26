@@ -2,11 +2,11 @@
 
 kpts='3 5 5'
 
-cp ../starting_files/INCAR.relax .
-cp ../starting_files/POSCAR .
-cp ../starting_files/KPOINTS .
-cp ../starting_files/POTCAR .
-cp /projects/b1027/KDMiller_work/scripts/gen_relax_INCARs.sh .  
+cp ~/files_dft/MgTa2O6/INCAR.relax .   
+cp ~/files_dft/MgTa2O6/POSCAR .
+cp ~/files_dft/MgTa2O6/POTCAR .
+cp ~/files_dft/MgTa2O6/KPOINTS .
+cp ~/scripts_dft/gen_relax_INCARs.sh .  
 cp INCAR.relax INCAR
 sed -i -e "4s/.*/$kpts/" KPOINTS
 ./gen_relax_INCARs.sh

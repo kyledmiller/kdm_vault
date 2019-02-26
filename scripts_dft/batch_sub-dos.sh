@@ -6,11 +6,11 @@ emin=-10
 emax=10
 
 cp ../static/CHGCAR . 
-cp ../starting_files/INCAR.estruc .	
-cp ../starting_files/POSCAR.relaxed .
+cp ~/files_dft/MgTa2O6/INCAR.estruc .	
+cp ~/files_dft/MgTa2O6/POSCAR.relaxed .
 cp POSCAR.relaxed POSCAR
-cp ../starting_files/POTCAR .
-cp ../starting_files/KPOINTS .
+cp ~/files_dft/MgTa2O6/POTCAR .
+cp ~/files_dft/MgTa2O6/KPOINTS .
 
 sed -i -e "s/encutVAR/$encut/g" -e "s/nedosVAR/$nedos/g" INCAR.estruc
 sed -i -e "s/eminVAR/$emin/g" -e "s/emaxVAR/$emax/g" INCAR.estruc

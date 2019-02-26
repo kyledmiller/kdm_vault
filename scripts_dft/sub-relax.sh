@@ -47,7 +47,7 @@ mpirun /projects/b1027/VASPmod.5.4.4/vasp_std  > "$prefix1".is2.ib1.$it
 cp CONTCAR POSCAR.relaxed
 cp CONTCAR POSCAR.is2.ib1.$it
 done
-cp POSCAR.relaxed ../starting_files
+cp POSCAR.relaxed ~/files_dft/MgTa2O6
 
 #Standard static calc and DOS calc
 #cp INCAR.conv INCAR
