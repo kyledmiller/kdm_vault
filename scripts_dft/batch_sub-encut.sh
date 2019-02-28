@@ -1,6 +1,6 @@
 #!/bin/bash
 variable=encut
-kpts='3 5 5'
+#kpts='3 5 5'
 
 for i in $(seq 0 100 900);
 do
@@ -13,7 +13,7 @@ do
 	cd "$var$i"
         sed -i -e "s/encutVAR/$i/g" INCAR.conv
         cp INCAR.conv INCAR
-	sed -i -e "4s/.*/$kpts/" KPOINTS
+	#sed -i -e "4s/.*/$kpts/" KPOINTS
 	msub sub-static.sh
         cd ..
 done
