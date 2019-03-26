@@ -4,8 +4,8 @@
 #MSUB -A p30625
 #MSUB -q short
 #MSUB -N MgTa2O6_static
-#MSUB -m abe
-#MSUB -M kmiller@u.northestern.edu
+#MOAB -m abe
+#MOAB -M kmiller@u.northwestern.edu
 #MSUB -l walltime=4:00:00
 
 module load mpi/openmpi-1.6.3-intel2013.2
