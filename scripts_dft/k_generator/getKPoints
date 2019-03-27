@@ -1,0 +1,269 @@
+#!/bin/bash
+
+#################################################################
+#   Copyright 2016-2019, Johns Hopkins University               #
+#                                                               #
+#   Permission is hereby granted, free of charge,               #
+#   to any person obtaining a copy of this software             #
+#   and associated documentation files (the "Software"),        #
+#   to deal in the Software without restriction, including      #
+#   without limitation the rights to use, copy, modify,         #
+#   merge, publish, distribute, sublicense, and/or sell         #
+#   copies of the Software, and to permit persons to            #
+#   whom the Software is furnished to do so,                    #
+#   subject to the following conditions:                        #
+#                                                               #
+#   The above copyright notice and this permission              #
+#   notice shall be included in all copies or                   #
+#   substantial portions of the Software.                       #
+#                                                               #
+#   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY 	        #
+#   OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING                  #
+#   BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       #
+#   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.       #
+#   IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 	                #
+#   HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES                    #
+#   OR OTHER LIABILITY, WHETHER IN AN ACTION                    #
+#   OF CONTRACT, TORT OR OTHERWISE, ARISING                     #
+#   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE	            #
+#   OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.               #
+#################################################################
+
+#################################################################
+#   Generate a k-point grid by calling the local executable     #
+#   jar or sending a request to the k-points server, if a local #
+#   jar is not found.                                           #
+#                                                               #
+#   This script assumes that the user is calling it from the    #
+#   directory containing the necessary files. Current stable    #
+#   version of the executable jar and the server support VASP   #
+#   only. User at least has to have a POSCAR to use the         #
+#   program. If there is no INCAR found, the program assumes    #
+#   user wants to use symmetry detected from the POSCAR. If no  #
+#   PRECALC is found, the program assumes the default values    #
+#       MINDISTANCE=28.1                                        #
+#       INCLUDEGAMMA=AUTO                                       #
+#                                                               #
+#   The script can be placed at whereever use found convenient. #
+#   Putting it in $HOME/bin is a good choice.                   #
+#                                                               #
+# 	Questions, comments, feedback, saw some bad coding?         #
+#   Email us at kpoints@jhu.edu	                                #
+# 	                                                            #
+#   Authored by Pandu Wisesa                                    # 
+#   Updated  by Yunzhe Wang                                     #
+#################################################################
+
+#################################################################
+# User's local variables
+
+# The folder containing the GridGenerator.jar. 
+# Please give the absolute path.
+JAR_PATH="~/Projects/kdm_vault/scripts_dft/k_generator/"
+
+# switch to control whether to call the server when the local
+# version is not found. The Default is FALSE.
+CALL_SERVER_IF_LOCAL_MISSING="FALSE"
+
+# The script assumes the minDistanceCollections is in the same 
+# folder as GridGenerator. If not, users can set it themselves.
+LATTICE_COLLECTIONS="$JAR_PATH"
+
+################################################################
+# Generally, user doesn't need touch everything below here.
+
+version="C2019.02.28" 
+echo "Running getKPoints script version" $version".";
+
+# This switch controls the information regarding grid generation output file.
+# The default is "TRUE", replacing it with "FALSE" or any other values will turn it off.
+list_message="TRUE"
+
+# These format the messages accordingly
+warning_message()
+{
+  echo "Warning: "$1
+}
+
+error_message()
+{
+  echo "Error: "$1 
+}
+
+# Check for early kill signals.
+killed()
+{
+  echo `error_message "Command was terminated by user."`
+}
+trap 'killed' 1 2 3
+
+failed_to_connect()
+{
+  echo `error_message "There is a problem connecting to the database."`
+  echo ""
+}
+trap 'failed_to_connect' 6 7 10 27
+
+
+# Check for format of the software package, right now only VASP is supported.
+found_input_files="FALSE"
+determine_input_format()
+{
+  input="$1"
+  if [ "$input" == "POSCAR" ]; then
+    echo "-vasp"
+  fi 
+}
+
+generate_grid_for_vasp_jar() 
+{
+    if ! java -version > /dev/null 2>&1 ; then
+        echo "Local installation of JAVA is not found."
+        return 1
+    fi
+
+    if [ -z ${JAR_PATH} ] || [ ! -e ${JAR_PATH}/GridGenerator.jar ]; then
+        echo "Local installation of k-pointGridGenerator is not found."
+        return 1
+    fi
+
+    echo "Generating grid using local installation at ${JAR_PATH} ..."
+    if [ ! -f INCAR ]; then
+        echo `warning_message "No INCAR file detected. \
+Using only symmetry information from structure file."`
+    fi
+
+    java -DLATTICE_COLLECTIONS="${LATTICE_COLLECTIONS}" \
+                -jar ${JAR_PATH}/GridGenerator.jar ./
+    return 0
+}
+
+# Generate a KPOINTS file for VASP.
+# Due to how VASP filenames are, the files can be fetched directly by their names.
+generate_grid_for_vasp_server()
+{
+  echo "Generating grid using remote server at muellergroup.jhu.edu ..."
+  if [ -f INCAR ]; then
+    KPTS=$(curl -s http://muellergroup.jhu.edu:8080/PreCalcServer/PreCalcServlet?format=vasp\&messagelist="$list_message"\&clientversion=$version --form "fileupload=@PRECALC" --form "fileupload=@POSCAR" --form "fileupload=@INCAR")
+  else
+    echo `warning_message "No INCAR file detected. Using only symmetry information from structure file."`
+    KPTS=$(curl -s http://muellergroup.jhu.edu:8080/PreCalcServer/PreCalcServlet?format=vasp\&messagelist="$list_message"\&clientversion=$version --form "fileupload=@PRECALC" --form "fileupload=@POSCAR")
+  fi
+  STAT=$(echo $?)
+  if [ "$STAT" -ne 0 ]; then
+      if [ "$STAT" -eq 18 ]; then
+        # curl return code: partial file received
+        echo `error_message "Only partial files have been received. Either user terminate the command \
+or the internet connection is interrupted."`
+        exit 7
+      elif [ "$STAT" -eq 130 ]; then
+        # fatal error in curl exit with: "128 + n"
+        # User enter "Crtl-C" while waiting for response.
+        exit 2
+      else
+        echo `error_message "Can't connect to the database."`
+        exit 7
+      fi
+  else
+    if [ "$list_message" == "TRUE" ]; then
+      HEAD=$(echo "$KPTS" | sed '/+++SEPARATE_HERE+++/,$d')
+      GRID=$(echo "$KPTS" | sed '/+++SEPARATE_HERE+++/,$!d' | sed 1d)
+      OUT_OK="TRUE"
+      if echo "$HEAD" | grep --quiet "\!\!\!"; then
+        OUT_OK="FALSE"
+      fi
+      echo "$HEAD" | sed "s/\!\!\!/Error: /"
+      if [ "$OUT_OK" == "TRUE" ]; then
+        echo "$GRID" > KPOINTS
+      fi
+    else
+      echo "$KPTS" > KPOINTS
+    fi
+  fi
+  # Do a quick check of the integrity of the KPOINTS file.
+  if [ -f KPOINTS ]; then
+    if grep --quiet "HTTP Status" KPOINTS; then
+      rm KPOINTS
+      echo `error_message "Invalid KPOINTS file was generated. Please check your input files and re-submit the request."`
+    fi
+    if grep --quiet "\!\!\!" KPOINTS; then
+      grep "\!\!\!" KPOINTS | sed "s/\!\!\!/Error: /"
+      rm KPOINTS 
+    fi
+  fi
+}
+
+# Check variables and decide to call either local application or the Server
+generate_grid_for_vasp(){
+    if ! generate_grid_for_vasp_jar; then
+        if [ $CALL_SERVER_IF_LOCAL_MISSING == "TRUE" ]; then
+            generate_grid_for_vasp_server
+        fi
+    fi
+}
+
+# Check if PRECALC file exists
+precalc_default="FALSE"
+check_precalc()
+{
+  if [ -f PRECALC ]; then 
+    precalc_default="FALSE"
+  else # In the case PRECALC does not exists, create an empty file to feed in
+    echo `warning_message "No PRECALC file detected. Using default values."`
+    touch PRECALC
+    # If you want to edit your own default PRECALC settings, 
+    # you can uncomment and edit these lines.
+    #echo "MINDISTANCE=28.1" >> PRECALC  
+    #echo "INCLUDEGAMMA=FALSE" >> PRECALC
+    precalc_default="TRUE"
+  fi   
+}
+
+
+################################# main() ######################################
+check_precalc
+# Check if the first argument is the format or filename.
+if [ "$1" == -* ]; then 
+  format="$1"
+  file1="$2"
+else
+  format=""
+  file1="$1"
+fi
+
+# If no format is specified, scour through the files in 
+# this directories for input structure(s). In addition, generate 
+# the grids for every structures found.
+if [ "$format" == "" ]; then 
+  
+  for files in *; do
+    format=$(determine_input_format $files)
+    if [ "$format" == "-vasp" ]; then
+        found_input_files="TRUE"
+        generate_grid_for_vasp
+    fi
+  done
+  
+  if [ "$precalc_default" == "TRUE" ]; then
+    rm PRECALC
+  fi
+  if [ "$found_input_files" == "FALSE" ]; then
+    echo `error_message "Found no input files for grid generation, exiting..."`
+  fi
+  echo "Finished."
+  exit 0
+# Otherwise generate the grid for that input file.
+elif [ "$format" == "-vasp" ]; then 
+    generate_grid_for_vasp
+fi
+
+# Final cleanup
+if [ "$precalc_default" == "TRUE" ]; then
+  rm PRECALC
+fi
+if [ "$found_input_files" == "FALSE" ]; then
+  echo `error_message "Found no input files for grid generation, exiting..."`
+fi
+echo "Finished."
+
+
