@@ -10,7 +10,7 @@ def main():
     files = sys.argv[1:]
     for file in files:
         print("\nSymmetry for {} \nprec \tSG Sym\tSG Num".format(file))
-        for tol in [,0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]: 
+        for tol in [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1]: 
             struc = IStructure.from_file(file)
             sg = sga(struc, symprec=tol)
             sgSym = sg.get_space_group_symbol()

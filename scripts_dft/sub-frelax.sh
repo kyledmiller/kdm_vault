@@ -23,7 +23,7 @@ cp POSCAR POSCAR.orig
 #nprocs=`wc -l $PBS_NODEFILE | awk '{ print $1 }'`
 echo $PBS_NODEFILE
 
-prefix1=std-frelax.out
+outfile=std-frelax.out
 
 for it in 1 2 3;do
 for is in 3;do
@@ -33,13 +33,16 @@ dirName=is"$is".ib"$ib".it"$it"
 mkdir $dirName
 
 cp INCAR.is"$is".ib"$ib" $dirName/INCAR
-cp POSCAR $dirName/POSCAR
-cp POTCAR $dirName/POTCAR
-cp KPOINTS $dirName/KPOINTS
+cp POSCAR $dirName/
+cp POTCAR $dirName/
+cp KPOINTS $dirName/
+cp WAVECAR $dirName/
+cp CHGCAR $dirName/
+
 cd $dirName/
 cp POSCAR POSCAR.before
 echo "Running in $dirName"
-mpirun /projects/b1027/VASPmod.5.4.4/vasp_std > "$prefix1"
+mpirun /projects/b1027/VASPmod.5.4.4/vasp_std > "$outfile"
 #printf "Ran in $dirName" > CONTCAR
 cp CONTCAR POSCAR.after
 cp CONTCAR ../POSCAR
@@ -50,6 +53,10 @@ cd ..
 done
 done
 done
+cd is3.ib1.it3
+cp OUTCAR ../final-OUTCAR
+cp $outfile ../final-$outfile
+
 #cp POSCAR.relaxed ~/files_dft/MgTa2O6
 
 
