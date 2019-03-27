@@ -2,11 +2,11 @@
 #MSUB -l nodes=1:ppn=24
 ##queues: short, normal, long
 #MSUB -A p30625
-#MSUB -q short
+#MSUB -q normal
 #MSUB -N MgTa2O6_static
 #MOAB -m abe
 #MOAB -M kmiller@u.northwestern.edu
-#MSUB -l walltime=4:00:00
+#MSUB -l walltime=48:00:00
 
 module load mpi/openmpi-1.6.3-intel2013.2
 module load intel/2016.0

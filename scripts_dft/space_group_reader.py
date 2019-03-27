@@ -9,11 +9,13 @@ import sys
 def main():
     files = sys.argv[1:]
     for file in files:
-        struc = IStructure.from_file(file)
-        sg = sga(struc)
-        sgSym = sg.get_space_group_symbol()
-        sgNum = sg.get_space_group_number()
-        print('Space group for {} is {} ({})'.format(file,sgSym,str(sgNum)))
+	print("Symmetry for {} \nsymprec \tSG Sym\tSG Num".format(file))
+        for tol in [0.00001, 0.0001, 0.001, 0.01, 0.1]: 
+		struc = IStructure.from_file(file)
+        	sg = sga(struc, symprec=tol)
+        	sgSym = sg.get_space_group_symbol()
+        	sgNum = sg.get_space_group_number()
+        	print("{}\t{}\t{})".format(str(tol),sgSym,str(sgNum)))
 
 if __name__ == "__main__":
     main()
