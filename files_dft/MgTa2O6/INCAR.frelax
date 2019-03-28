@@ -35,7 +35,7 @@ ISMEAR = -5 # 0=Gaussian, -5=Tetrahedron method
 #BMIX_MAG = 0.0001
 
 # Calculation Details
-LWAVE = .TRUE. # Do we want to write the wavefunctions (usually in GB)
+LWAVE = .FALSE. # Do we want to write the wavefunctions (usually in GB)
 LCHARG = .TRUE. # Do we want to write the charge density (usually <1GB)
 PREC = Accurate # Accurate FFT grid
 ENCUT = 600 # Plane wave energy cutoff

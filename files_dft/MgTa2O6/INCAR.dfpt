@@ -28,7 +28,7 @@ ENCUT = encutVAR # Plane wave energy cutoff
 LREAL = .FALSE. # real space projection; disable for higher accuracy in forces
 
 # Relaxation parameters
-NSW = 0 # number of ionic steps
+NSW = 1 # number of ionic steps
 ISIF = 0 # calculate force and relax ions and lattice parameters
 IBRION = 8 # Newtonian method for mini_opt
 #POTIM = 0.2 # quasi_newton scalar for ionic relaxation step
@@ -52,6 +52,6 @@ ISPIN = 1 # Turn on collinear magnetism
 
 #Parallelization
 #LPLANE = .TRUE.
-#NPAR   = 4  # Parallelize over bands. Should be factor of number of cores
+NPAR   = 4  # Parallelize over bands. Should be factor of number of cores
 #LSCALU = .FALSE.
 #NSIM = 4

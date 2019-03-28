@@ -36,8 +36,7 @@ cp INCAR.is"$is".ib"$ib" $dirName/INCAR
 cp POSCAR $dirName/
 cp POTCAR $dirName/
 cp KPOINTS $dirName/
-cp WAVECAR $dirName/
-cp CHGCAR $dirName/
+cp CHGCAR $dirName/  #continuity
 
 cd $dirName/
 cp POSCAR POSCAR.before
@@ -46,7 +45,6 @@ mpirun /projects/b1027/VASPmod.5.4.4/vasp_std > "$outfile"
 #printf "Ran in $dirName" > CONTCAR
 cp CONTCAR POSCAR.after
 cp CONTCAR ../POSCAR
-cp WAVECAR ../
 cp CHGCAR ../
 cd ..
 
