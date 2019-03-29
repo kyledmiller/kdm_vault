@@ -14,7 +14,7 @@ NELM = 40      # Maximum number of electronic steps before giving up
 
 # High prec for force calculations
 #ENAUG = 1
-#ADDGRID = .TRUE.
+ADDGRID = .TRUE.
 
 # Density of States Info
 #NEDOS = 3001   # Increase for high resolution DOS plots
@@ -52,7 +52,7 @@ LREAL = .FALSE. # real space projection; disable for higher accuracy in forces
 
 # Relaxation parameters
 NSW = 0 # number of ionic steps
-ISIF = 0 # calculate force and relax ions and lattice parameters
+#ISIF = 0 # calculate force and relax ions and lattice parameters
 IBRION = -1 # Newtonian method for mini_opt
 #POTIM = 0.2 # quasi_newton scalar for ionic relaxation step
 #EDIFFG = -0.0005

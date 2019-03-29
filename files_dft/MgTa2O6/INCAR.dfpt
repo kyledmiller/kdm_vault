@@ -14,7 +14,6 @@ NELM = 40      # Maximum number of electronic steps before giving up
 
 # Phonon stuff
 ADDGRID = .TRUE.
-IALGO = 38
 
 # BZ Integrations
 ISMEAR = 0 # 0=Gaussian, -5=Tetrahedron method
@@ -29,7 +28,7 @@ LREAL = .FALSE. # real space projection; disable for higher accuracy in forces
 
 # Relaxation parameters
 NSW = 1 # number of ionic steps
-ISIF = 0 # calculate force and relax ions and lattice parameters
+#ISIF = 0 # calculate force and relax ions and lattice parameters
 IBRION = 8 # Newtonian method for mini_opt
 #POTIM = 0.2 # quasi_newton scalar for ionic relaxation step
 #EDIFFG = -0.0005
