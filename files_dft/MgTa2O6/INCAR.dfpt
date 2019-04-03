@@ -6,14 +6,16 @@ ICHARG =      0  #  charge: 1-file 2-atom 10-const
 INIWAV =      1  #  electr: 0-lowe 1-rand
 
 # Convergence tolerance
-EDIFF = 1e-7   # Difference in energy allowed before electronic convergence
+EDIFF = 1e-8   # Difference in energy allowed before electronic convergence
 #SYMPREC = 1e-4 # Precision in finding symmetry of structure
 ALGO = NORMAL  # stable blocked Davidson scheme
 NELM = 40      # Maximum number of electronic steps before giving up
 #NELMDL = 3    # Number of non-selfconsistent electronic steps at start
 
-# Phonon stuff
-ADDGRID = .TRUE.
+# Phonon stuff 
+ADDGRID = .TRUE. #higher precision
+ENAUG = 1 #higher precision
+IMIX = 1 #Kerker mixing to reduce charge sloshing
 
 # BZ Integrations
 ISMEAR = 0 # 0=Gaussian, -5=Tetrahedron method
@@ -51,6 +53,6 @@ ISPIN = 1 # Turn on collinear magnetism
 
 #Parallelization
 #LPLANE = .TRUE.
-NPAR   = 4  # Parallelize over bands. Should be factor of number of cores
+#NPAR   = 4  # Parallelize over bands. Should be factor of number of cores
 #LSCALU = .FALSE.
 #NSIM = 4

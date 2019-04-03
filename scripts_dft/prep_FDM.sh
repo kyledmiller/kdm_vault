@@ -13,6 +13,7 @@ cp ~/files_dft/MgTa2O6/INCAR.$suffix .
 cp ~/files_dft/MgTa2O6/POTCAR .
 cp ~/files_dft/MgTa2O6/KPOINTS.PHON .
 cp ~/scripts_dft/sub-static.sh .
+cp ~/scripts_dft/batch_sub-FDM.sh .
 
 sed -i -e "s/encutVAR/$encut/g" INCAR.$suffix
 #sed -i -e "4s/.*/$kpt/" KPOINTS
