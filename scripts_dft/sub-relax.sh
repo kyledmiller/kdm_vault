@@ -15,7 +15,8 @@ module load python
 
 #Set Working Directory
 cd $PBS_O_WORKDIR
-cp POSCAR POSCAR.orig
+#cp POSCAR POSCAR.orig
+
 
 #module load mpi/intel-mpi-4.1.0
 
