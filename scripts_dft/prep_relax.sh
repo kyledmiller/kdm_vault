@@ -5,11 +5,11 @@
 
 
 # Copy over the necessary files
-cp ~/files_dft/MgTa2O6/INCAR.relax .
+#cp ~/files_dft/MgTa2O6/INCAR.relax .
 #cp ~/files_dft/MgTa2O6/POSCAR.relax .
-cp ~/files_dft/MgTa2O6/POTCAR .
-cp ~/files_dft/MgTa2O6/KPOINTS .
-cp ~/scripts_dft/sub-relax.sh .
+#cp ~/files_dft/MgTa2O6/POTCAR .
+#cp ~/files_dft/MgTa2O6/KPOINTS .
+#cp ~/scripts_dft/sub-relax.sh .
 #sed -i -e "4s/.*/$kpts/" KPOINTS
 #cp POSCAR.relax POSCAR
 

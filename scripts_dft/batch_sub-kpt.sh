@@ -15,7 +15,7 @@ do
         sed -i -e "s/encutVAR/$encut/g" INCAR.conv
 	sed -i -e "4s/.*/$i/" KPOINTS
 	cp INCAR.conv INCAR
-	msub ../sub-static.sh
+	sbatch ../sub-static.sh
         cd ..
 done
 

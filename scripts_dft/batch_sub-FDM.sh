@@ -33,7 +33,7 @@ for iter in $(seq 1 $numdisp);do
 	cp KPOINTS $iter/
 	cp INCAR $iter/
 	cd $iter/
-	msub sub-static.sh
+	sbatch sub-static.sh
 	
 	cd ..
 done
