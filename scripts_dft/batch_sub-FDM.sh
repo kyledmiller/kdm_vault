@@ -1,9 +1,4 @@
 #!/bin/bash
-encut=600
-#kpt='3 5 5'
-#nedos=301
-#emin=-8
-#emax=14
 
 suffix=fdm
 
