@@ -1,9 +1,11 @@
 #!/bin/bash
 
-writeFile='stats.txt'
+outputDir='output_files'
+writeFile="$outputDir"'/stats.txt'
 
 #for outfile in $(find . -wholename '*/final-OUTCAR' |sort);
 printf "Run ID\tTotal Energy\tPres\tPulay\tDrift in x\tDrift in y\tDrift in z\n" >> $writeFile
+mkdir $outputDir
 for suffix in 'd0' 'd025' 'd05' 'd075' 'd1';do    
         outfile="$suffix"/final-OUTCAR
 	printf "$suffix" >> $writeFile
