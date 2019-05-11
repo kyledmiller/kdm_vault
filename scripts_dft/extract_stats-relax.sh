@@ -2,6 +2,7 @@
 
 outputDir='output_files'
 writeFile="$outputDir"'/stats.txt'
+mkdir $outputDir
 
 #for outfile in $(find . -wholename '*/final-OUTCAR' |sort);
 printf "Run ID\tTotal Energy\tPres\tPulay\tDrift in x\tDrift in y\tDrift in z\n" >> $writeFile

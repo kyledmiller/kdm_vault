@@ -12,14 +12,16 @@ ALGO = NORMAL  # stable blocked Davidson scheme
 NELM = 40      # Maximum number of electronic steps before giving up
 #NELMDL = 3    # Number of non-selfconsistent electronic steps at start
 
+#NELECT = 120
+
 # High prec for force calculations
 #ENAUG = 1
 #ADDGRID = .TRUE.
 
 # Density of States Info
-NEDOS = nedosVAR   # Increase for high resolution DOS plots
-EMIN = eminVAR
-EMAX = emaxVAR
+NEDOS = 301   # Increase for high resolution DOS plots
+EMIN = -8
+EMAX = 20
 
 LORBIT = 11    # Project DOS onto individual atoms' orbitals
 
@@ -37,7 +39,7 @@ ISMEAR = -5 # 0=Gaussian, -5=Tetrahedron method
 LWAVE = .FALSE. # Do we want to write the wavefunctions (usually in GB)
 LCHARG = .TRUE. # Do we want to write the charge density (usually <1GB)
 PREC = Accurate # Accurate FFT grid
-ENCUT = encutVAR # Plane wave energy cutoff
+ENCUT = 700 # Plane wave energy cutoff
 LREAL = .FALSE. # real space projection; disable for higher accuracy in forces
 
 #LSDA + U
@@ -64,6 +66,6 @@ ISPIN = 1 # Turn on collinear magnetism
 
 #Parallelization
 #LPLANE = .TRUE.
-#NPAR   = 4  # Parallelize over bands. Should be factor of number of cores
+NPAR   = 4  # Parallelize over bands. Should be factor of number of cores
 #LSCALU = .FALSE.
 #NSIM = 4

@@ -1,9 +1,9 @@
 #!/bin/bash
-
-for i in $(seq 100 100 900);
+writefile=energies.txt
+for i in $(seq 600 100 1200);
 
 do
-        printf $i >>Energy.txt
-        grep TOTEN $i/OUTCAR | tail -1 >>Energy.txt
+        printf $i 			>> $writefile
+        grep TOTEN $i/OUTCAR | tail -1 	>> $writefile
 done
 

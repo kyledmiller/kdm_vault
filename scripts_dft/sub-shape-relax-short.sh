@@ -5,8 +5,8 @@
 #SBATCH -e MgTa2O6_rlx.e%j           # output and error file name (%j expands to jobID) 
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=28
-#SBATCH -p normal             # queue (partition) -- normal, development, etc.
-#SBATCH -t 47:00:00            # wall time (hh:mm:ss)
+#SBATCH -p short              # queue (partition) -- normal, development, etc.
+#SBATCH -t 3:58:00            # wall time (hh:mm:ss)
 #SBATCH --mail-user=kmiller@u.northwestern.edu 
 #SBATCH --mail-type=end        # email when job ends
 
@@ -20,7 +20,7 @@ cp POSCAR POSCAR.orig
 outfile=std-relax.out
 
 for it in 1 2 3;do
-for is in 7 2 3;do
+for is in 3;do
 for ib in 2 1;do
 
 dirName=is"$is".ib"$ib".it"$it"
