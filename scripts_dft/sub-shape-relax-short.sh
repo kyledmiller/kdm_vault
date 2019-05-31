@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -A p30883        # which account to debit hours from
-#SBATCH -J MTO_rlx               # job name
+#SBATCH -J MTO_srlx               # job name
 #SBATCH -o MgTa2O6_rlx.o%j           # output and error file name (%j expands to jobID) 
 #SBATCH -e MgTa2O6_rlx.e%j           # output and error file name (%j expands to jobID) 
 #SBATCH -N 1

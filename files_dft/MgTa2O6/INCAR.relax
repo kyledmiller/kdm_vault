@@ -17,7 +17,7 @@ NELM = 40      # Maximum number of electronic steps before giving up
 
 # High prec for force calculations
 #ENAUG = 1
-#ADDGRID = .TRUE.
+ADDGRID = .TRUE.
 
 # Density of States Info
 #NEDOS = 3001   # Increase for high resolution DOS plots
@@ -61,9 +61,9 @@ IBRION = 2 # Newtonian method for mini_opt
 #EDIFFG = -0.0005
 
 #Magnetism
-ISPIN = 2 # Turn on collinear magnetism
+#ISPIN = 2 # Turn on collinear magnetism
 #MAGMOM = 4*0 6.0 -6.0 6.0 -6.0 12*0 # Specify starting moments for each ion
-MAGMOM = 36*0.0
+#MAGMOM = 36*0.0
 
 #Parallelization
 #LPLANE = .TRUE.
