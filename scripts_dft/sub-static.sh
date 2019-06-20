@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH -A p30883        # which account to debit hours from
-#SBATCH -J MTO_static               # job name
-#SBATCH -o MgTa2O6_static.o%j           # output and error file name (%j expands to jobID) 
-#SBATCH -e MgTa2O6_static.e%j           # output and error file name (%j expands to jobID) 
+#SBATCH -J static               # job name
+#SBATCH -o slurm.o%j           # output and error file name (%j expands to jobID) 
+#SBATCH -e slurm.e%j           # output and error file name (%j expands to jobID) 
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=28
 #SBATCH -p short              # queue (partition) -- normal, development, etc.

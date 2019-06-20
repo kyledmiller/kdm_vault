@@ -6,7 +6,7 @@ ICHARG =      1  #  charge: 1-file 2-atom 10-const
 INIWAV =      1  #  electr: 0-lowe 1-rand
 
 # Convergence tolerance
-EDIFF = 1e-7   # Difference in energy allowed before electronic convergence
+EDIFF = 1e-6   # Difference in energy allowed before electronic convergence
 #SYMPREC = 1e-4 # Precision in finding symmetry of structure
 ALGO = NORMAL  # stable blocked Davidson scheme
 NELM = 40      # Maximum number of electronic steps before giving up
@@ -24,8 +24,8 @@ ADDGRID = .TRUE.
 LORBIT = 0    # Project DOS onto individual atoms' orbitals
 
 # BZ Integrations
-ISMEAR = -5 # 0=Gaussian, -5=Tetrahedron method
-#SIGMA = 0.1 # Smearing width for Gaussian in eV
+ISMEAR = 0 # 0=Gaussian, -5=Tetrahedron method
+SIGMA = 0.1 # Smearing width for Gaussian in eV
 
 #Mixing
 #AMIX = 0.2
@@ -58,7 +58,7 @@ IBRION = -1 # Newtonian method for mini_opt
 #EDIFFG = -0.0005
 
 #Magnetism
-#ISPIN = 2 # Turn on collinear magnetism
+ISPIN = 2 # Turn on collinear magnetism
 #MAGMOM = 4*0 6.0 -6.0 6.0 -6.0 12*0 # Specify starting moments for each ion
 #MAGMOM = 36*0.0
 

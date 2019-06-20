@@ -22,7 +22,11 @@ fi
 
 for iter in $(seq 1 $numdisp);do
 	mkdir $iter
-	mv POSCAR-00$iter $iter/POSCAR
+	if [ $iter -gt 9 ]; then
+		mv POSCAR-0$iter $iter/POSCAR
+	else
+		mv POSCAR-00$iter $iter/POSCAR
+	fi
 	cp sub-static.sh $iter/		
 	cp POTCAR $iter/
 	cp KPOINTS $iter/
