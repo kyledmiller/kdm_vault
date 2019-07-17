@@ -6,14 +6,15 @@ ICHARG =      1  #  charge: 1-file 2-atom 10-const
 INIWAV =      1  #  electr: 0-lowe 1-rand
 
 # Convergence tolerance
-EDIFF = 1e-6   # Difference in energy allowed before electronic convergence
-EDIFFG = -1e-3
+EDIFF = 1e-8   # Difference in energy allowed before electronic convergence
+EDIFFG = -1e-4
 #SYMPREC = 1e-4 # Precision in finding symmetry of structure
-ALGO = NORMAL  # stable blocked Davidson scheme
+ALGO = FAST  # stable blocked Davidson scheme
 NELM = 40      # Maximum number of electronic steps before giving up
 #NELMDL = 3    # Number of non-selfconsistent electronic steps at start
 
 #NELECT = 124
+#NELECT-flag 	# used by sed in prep scripts
 
 # High prec for force calculations
 #ENAUG = 1

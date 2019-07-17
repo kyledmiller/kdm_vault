@@ -9,10 +9,10 @@ emax=15
 cp ../static/CHGCAR . 
 cp ../static/POSCAR .
 cp ../static/KPOINTS .
+cp ../static/POTCAR .
 cp ~/files_dft/MgTa2O6/INCAR.estruc .	
 #cp ~/files_dft/MgTa2O6/POSCAR.relaxed .
 #cp POSCAR.relaxed POSCAR
-cp ~/files_dft/MgTa2O6/POTCAR .
 #cp ~/files_dft/MgTa2O6/KPOINTS .
 cp ~/scripts_dft/sub-static.sh .
 

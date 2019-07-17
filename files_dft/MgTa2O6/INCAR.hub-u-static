@@ -31,11 +31,22 @@ PREC = Accurate # Accurate FFT grid
 ENCUT = 800 # Plane wave energy cutoff
 LREAL = .FALSE. # real space projection; disable for higher accuracy in forces
 
+#LSDA + U
+LDAU = .TRUE.   # Use Hubbard U or not
+LDAUTYPE = 2    # Method of Dudarev
+LDAUL = -1 2 -1 # Which species will have Hubbard U enabled
+LDAUU = 0 U-flag 0 # Effective U is U-J
+#LDAUJ = 0 0 0
+LMAXMIX = 4     # Apply to d-orbitals
+LDAUPRINT = 1   # Verbosity of output
+LASPH = .TRUE.  # include non-spherical contributions from the gradient corrections inside the PAW spheres
+
 # Relaxation parameters
 NSW = 0 # number of ionic steps
 ISIF = 0 # calculate force and relax ions and lattice parameters
 IBRION = -1 # Newtonian method for mini_opt
 #POTIM = 0.2 # quasi_newton scalar for ionic relaxation step
+#EDIFFG = -0.0005
 
 #Magnetism
 ISPIN = 2 # Turn on collinear magnetism
@@ -54,3 +65,4 @@ NPAR = 4  # Parallelize over bands. Should be factor of number of cores
 #BMIX = 0.0001
 #AMIX_MAG = 0.8
 #BMIX_MAG = 0.0001
+

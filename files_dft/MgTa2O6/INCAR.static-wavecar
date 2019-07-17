@@ -25,7 +25,7 @@ ISMEAR = 0 # 0=Gaussian, -5=Tetrahedron method
 SIGMA = 0.1 # Smearing width for Gaussian in eV
 
 # Calculation Details
-LWAVE = .FALSE. # Do we want to write the wavefunctions (usually in GB)
+LWAVE = .TRUE. # Do we want to write the wavefunctions (usually in GB)
 LCHARG = .TRUE. # Do we want to write the charge density (usually <1GB)
 PREC = Accurate # Accurate FFT grid
 ENCUT = 800 # Plane wave energy cutoff

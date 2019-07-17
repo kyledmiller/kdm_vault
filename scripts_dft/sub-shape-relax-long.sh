@@ -6,7 +6,7 @@
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=28
 #SBATCH -p normal              # queue (partition) -- normal, development, etc.
-#SBATCH -t 47:00:00            # wall time (hh:mm:ss)
+#SBATCH -t 48:00:00            # wall time (hh:mm:ss)
 #SBATCH --mail-user=kmiller@u.northwestern.edu 
 #SBATCH --mail-type=end        # email when job ends
 
@@ -31,6 +31,7 @@ cp POSCAR $dirName/
 cp POTCAR $dirName/
 cp KPOINTS $dirName/
 cp CHGCAR $dirName/  #continuity
+cp WAVECAR $dirName/
 
 cd $dirName/
 cp POSCAR POSCAR.before
@@ -39,6 +40,7 @@ mpirun -n $SLURM_NTASKS /projects/b1027/VASPmod.5.4.4/vasp_std > $outfile
 cp CONTCAR POSCAR.after
 cp CONTCAR ../POSCAR
 cp CHGCAR ../
+cp WAVECAR ../
 cp OUTCAR ../final-OUTCAR
 cp $outfile ../final-$outfile
 

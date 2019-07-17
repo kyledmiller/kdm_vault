@@ -6,7 +6,7 @@
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=28
 #SBATCH -p normal              # queue (partition) -- normal, development, etc.
-#SBATCH -t 47:00:00            # wall time (hh:mm:ss)
+#SBATCH -t 48:00:00            # wall time (hh:mm:ss)
 #SBATCH --mail-user=kmiller@u.northwestern.edu 
 #SBATCH --mail-type=end        # email when job ends
 

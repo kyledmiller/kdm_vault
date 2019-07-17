@@ -20,7 +20,7 @@ for iter in '122.6_d065' '122.8_d07' '123.2_d08' '123.4_d085';do
 	cp ~/files_dft/MgTa2O6/INCAR.estruc INCAR   
 	cp ../../$src/$fname/POSCAR .
 	cp ~/files_dft/MgTa2O6/POTCAR .
-        cp ~/files_dft/MgTa2O8/KPOINTS.bands KPOINTS
+	cp ~/files_dft/MgTa2O6/KPOINTS .
 	cp ~/scripts_dft/sub-static.sh .
 
 	sed -i "s/#NELECT-flag/NELECT = $nelect/" INCAR

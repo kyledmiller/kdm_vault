@@ -8,11 +8,11 @@ for iter in '120d0' '121d025' '122d05' '123d075' '124d1';do
 	cd $fname
 	#echo "Don't forget to copy in the CHGCAR"
 	#cp ../../static/$fname/CHGCAR . 
-	cp ~/files_dft/MgTa2O6/INCAR.static INCAR   
+	cp ~/files_dft/MgTa2O6/INCAR.spinorb-static INCAR   
 	cp ../../$src/$fname/POSCAR .
 	cp ~/files_dft/MgTa2O6/POTCAR .
 	cp ~/files_dft/MgTa2O6/KPOINTS .
-	cp ~/scripts_dft/sub-static.sh .
+	cp ~/scripts_dft/sub-ncl-static.sh .
 
 	sed -i "s/#NELECT-flag/NELECT = $nelect/" INCAR
 	#sed -i -e "s/encutVAR/$encut/g" -e "s/nedosVAR/$nedos/g" INCAR
