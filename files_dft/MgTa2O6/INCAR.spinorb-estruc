@@ -18,6 +18,8 @@ ADDGRID = .TRUE.
 
 #NELECT-flag 	# used by sed in prep scripts
 
+ISYM = 1
+
 # Density of States Info
 NEDOS = nedosVAR   # Increase for high resolution DOS plots
 EMIN = eminVAR

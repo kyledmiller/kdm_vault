@@ -12,6 +12,8 @@ ALGO = FAST  # stable blocked Davidson scheme
 NELM = 80      # Maximum number of electronic steps before giving up
 #NELMDL = 3    # Number of non-selfconsistent electronic steps at start
 
+
+ISYM = 0
 #NELECT-flag
 
 # High prec for force calculations

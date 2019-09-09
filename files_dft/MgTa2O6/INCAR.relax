@@ -66,6 +66,6 @@ ISPIN = 2 # Turn on collinear magnetism
 
 #Parallelization
 #LPLANE = .TRUE.
-NPAR   = 4  # Parallelize over bands. Should be factor of number of cores
+NPAR = 7  # Parallelize over bands. Should be factor of number of cores
 #LSCALU = .FALSE.
 #NSIM = 4
