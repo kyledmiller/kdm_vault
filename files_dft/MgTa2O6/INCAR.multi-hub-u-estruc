@@ -46,8 +46,8 @@ LREAL = .FALSE. # real space projection; disable for higher accuracy in forces
 #LSDA + U
 LDAU = .TRUE.   # Use Hubbard U or not
 LDAUTYPE = 2    # Method of Dudarev
-LDAUL = -1 2 -1 # Which species will have Hubbard U enabled
-LDAUU = 0 U-flag 0 # Effective U is U-J
+LDAUL = 2 2 -1 # Which species will have Hubbard U enabled
+LDAUU = U-flag-1 U-flag-2 0 # Effective U is U-J
 #LDAUJ = 0 0 0
 LMAXMIX = 4     # Apply to d-orbitals
 LDAUPRINT = 1   # Verbosity of output

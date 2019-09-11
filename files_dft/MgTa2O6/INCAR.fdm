@@ -1,8 +1,8 @@
 System = MgTa2O6   # Title string for user convenience
 
 #Start parameters
-ISTART =      0  #  job   : 0-new  1-cont  2-samecut
-ICHARG =      0  #  charge: 1-file 2-atom 10-const
+ISTART =      1  #  job   : 0-new  1-cont  2-samecut
+ICHARG =      1  #  charge: 1-file 2-atom 10-const
 INIWAV =      1  #  electr: 0-lowe 1-rand
 
 # Convergence tolerance
@@ -50,12 +50,12 @@ IBRION = -1 # Newtonian method for mini_opt
 
 
 #Magnetism
-ISPIN = 1 # Turn on collinear magnetism
+ISPIN = 2 # Turn on collinear magnetism
 #MAGMOM = 4*0 6.0 -6.0 6.0 -6.0 12*0 # Specify starting moments for each ion
 #MAGMOM = 36*0.0
 
 #Parallelization
 #LPLANE = .TRUE.
-NPAR   = 4  # Parallelize over bands. Should be factor of number of cores
+NPAR = 7  # Parallelize over bands. Should be factor of number of cores
 #LSCALU = .FALSE.
 #NSIM = 4

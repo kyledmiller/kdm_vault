@@ -54,7 +54,7 @@ LDAUPRINT = 1   # Verbosity of output
 LASPH = .TRUE.  # include non-spherical contributions from the gradient corrections inside the PAW spheres
 
 # Relaxation parameters
-NSW = 1000 # number of ionic steps
+NSW = 100 # number of ionic steps
 ISIF = 2 # calculate force and relax ions and lattice parameters
 IBRION = 2 # Newtonian method for mini_opt
 #POTIM = 0.2 # quasi_newton scalar for ionic relaxation step
@@ -66,6 +66,6 @@ ISPIN = 2 # Turn on collinear magnetism
 
 #Parallelization
 #LPLANE = .TRUE.
-NPAR   = 4  # Parallelize over bands. Should be factor of number of cores
+NPAR = 16  # Parallelize over bands. Should be factor of number of cores
 #LSCALU = .FALSE.
 #NSIM = 4

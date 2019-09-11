@@ -3,10 +3,10 @@
 #SBATCH -J static               # job name
 #SBATCH -o slurm.o%j           # output and error file name (%j expands to jobID) 
 #SBATCH -e slurm.e%j           # output and error file name (%j expands to jobID) 
-#SBATCH -N 1
+#SBATCH -N 4
 #SBATCH --ntasks-per-node=28
 #SBATCH -p short              # queue (partition) -- normal, development, etc.
-#SBATCH -t 1:00:00            # wall time (hh:mm:ss)
+#SBATCH -t 4:00:00            # wall time (hh:mm:ss)
 #SBATCH --mail-user=kmiller@u.northwestern.edu 
 #SBATCH --mail-type=end        # email when job ends
 

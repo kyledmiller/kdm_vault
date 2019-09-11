@@ -10,16 +10,14 @@ mkdir $writeDir
 
 #for outfile in $(find . -wholename '*/final-OUTCAR' |sort);
 if [ $ISPIN -eq 2 ];then
-	printf "Total Energy\tPres\tPulay\tDrift in x\tDrift in y\tDrift in z\tVolume\tMag s\t Mag p \t Mag d\t Mag tot\n" >> $writeFile
+	printf "Total Energy\tDrift in x\tDrift in y\tDrift in z\tVolume\tMag s\t Mag p \t Mag d\t Mag tot\n" >> $writeFile
 else
-	printf "Total Energy\tPres\tPulay\tDrift in x\tDrift in y\tDrift in z\tVolume\n" >> $writeFile
+	printf "Total Energy\tDrift in x\tDrift in y\tDrift in z\tVolume\n" >> $writeFile
 fi
 
 
-outfile=final-OUTCAR
+outfile=OUTCAR
 grep TOTEN $outfile | tail -1 | awk '{printf $5; exit}' >> $writeFile
-tac $outfile | awk '/pressure/ {printf "\t"$4; exit}' >> $writeFile	
-tac $outfile | awk '/pressure/ {printf "\t"$9; exit}' >> $writeFile
 tac $outfile | awk '/drift/ {printf "\t"$3; exit}' >> $writeFile 
 tac $outfile | awk '/drift/ {printf "\t"$4; exit}' >> $writeFile 
 tac $outfile | awk '/drift/ {printf "\t"$5; exit}' >> $writeFile

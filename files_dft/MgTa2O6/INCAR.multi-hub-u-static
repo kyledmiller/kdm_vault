@@ -2,7 +2,7 @@ System = MgTa2O6   # Title string for user convenience
 
 #Start parameters
 ISTART =      1  #  job   : 0-new  1-cont  2-samecut
-ICHARG =      11  #  charge: 1-file 2-atom 10-const
+ICHARG =      1  #  charge: 1-file 2-atom 10-const
 INIWAV =      1  #  electr: 0-lowe 1-rand
 
 # Convergence tolerance
@@ -12,42 +12,30 @@ ALGO = NORMAL  # stable blocked Davidson scheme
 NELM = 80      # Maximum number of electronic steps before giving up
 #NELMDL = 3    # Number of non-selfconsistent electronic steps at start
 
+#NELECT-flag
+
 # High prec for force calculations
 #ENAUG = 1
 ADDGRID = .TRUE.
 
-#NELECT-flag 	# used by sed in prep scripts
-
-# Density of States Info
-NEDOS = nedosVAR   # Increase for high resolution DOS plots
-EMIN = eminVAR
-EMAX = emaxVAR
-
 LORBIT = 11    # Project DOS onto individual atoms' orbitals
-#NBANDS = 60
 
 # BZ Integrations
 ISMEAR = 0 # 0=Gaussian, -5=Tetrahedron method
 SIGMA = 0.1 # Smearing width for Gaussian in eV
 
-#Mixing
-#AMIX = 0.2
-#BMIX = 0.0001
-#AMIX_MAG = 0.8
-#BMIX_MAG = 0.0001
-
 # Calculation Details
 LWAVE = .FALSE. # Do we want to write the wavefunctions (usually in GB)
-LCHARG = .FALSE. # Do we want to write the charge density (usually <1GB)
+LCHARG = .TRUE. # Do we want to write the charge density (usually <1GB)
 PREC = Accurate # Accurate FFT grid
-ENCUT = encutVAR # Plane wave energy cutoff
+ENCUT = 800 # Plane wave energy cutoff
 LREAL = .FALSE. # real space projection; disable for higher accuracy in forces
 
 #LSDA + U
 LDAU = .TRUE.   # Use Hubbard U or not
 LDAUTYPE = 2    # Method of Dudarev
-LDAUL = -1 2 -1 # Which species will have Hubbard U enabled
-LDAUU = 0 U-flag 0 # Effective U is U-J
+LDAUL = 2 2 -1 # Which species will have Hubbard U enabled
+LDAUU = U-flag-1 U-flag-2 0 # Effective U is U-J
 #LDAUJ = 0 0 0
 LMAXMIX = 4     # Apply to d-orbitals
 LDAUPRINT = 1   # Verbosity of output
@@ -55,7 +43,7 @@ LASPH = .TRUE.  # include non-spherical contributions from the gradient correcti
 
 # Relaxation parameters
 NSW = 0 # number of ionic steps
-#ISIF = 0 # calculate force and relax ions and lattice parameters
+ISIF = 0 # calculate force and relax ions and lattice parameters
 IBRION = -1 # Newtonian method for mini_opt
 #POTIM = 0.2 # quasi_newton scalar for ionic relaxation step
 #EDIFFG = -0.0005
@@ -67,6 +55,14 @@ ISPIN = 2 # Turn on collinear magnetism
 
 #Parallelization
 #LPLANE = .TRUE.
-NPAR   = 4  # Parallelize over bands. Should be factor of number of cores
+NPAR = 4  # Parallelize over bands. Should be factor of number of cores
+#KPAR = 2
 #LSCALU = .FALSE.
 #NSIM = 4
+
+#Mixing
+#AMIX = 0.2
+#BMIX = 0.0001
+#AMIX_MAG = 0.8
+#BMIX_MAG = 0.0001
+

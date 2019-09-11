@@ -31,6 +31,7 @@ for iter in $(seq 1 $numdisp);do
 	cp POTCAR $iter/
 	cp KPOINTS $iter/
 	cp INCAR.$suffix $iter/INCAR
+	cp CHGCAR $iter
 	cd $iter/
 	sbatch sub-static.sh
 	

@@ -8,7 +8,7 @@ INIWAV =      1  #  electr: 0-lowe 1-rand
 # Convergence tolerance
 EDIFF = 1e-8   # Difference in energy allowed before electronic convergence
 #SYMPREC = 1e-4 # Precision in finding symmetry of structure
-ALGO = FAST  # stable blocked Davidson scheme
+ALGO = NORMAL  # stable blocked Davidson scheme
 NELM = 80      # Maximum number of electronic steps before giving up
 #NELMDL = 3    # Number of non-selfconsistent electronic steps at start
 

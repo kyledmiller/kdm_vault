@@ -55,7 +55,7 @@ LMAXMIX = 4     # Apply to d-orbitals
 LASPH = .TRUE.  # include non-spherical contributions from the gradient corrections inside the PAW spheres
 
 # Relaxation parameters
-NSW = 1000 # number of ionic steps
+NSW = 100 # number of ionic steps
 ISIF = 3 # calculate force and relax ions and lattice parameters
 IBRION = 2 # Newtonian method for mini_opt
 #POTIM = 0.2 # quasi_newton scalar for ionic relaxation step

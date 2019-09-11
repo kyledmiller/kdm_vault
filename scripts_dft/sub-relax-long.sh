@@ -3,7 +3,7 @@
 #SBATCH -J rlx               # job name
 #SBATCH -o slurm.o%j           # output and error file name (%j expands to jobID) 
 #SBATCH -e slurm.e%j           # output and error file name (%j expands to jobID) 
-#SBATCH -N 1
+#SBATCH -N 8
 #SBATCH --ntasks-per-node=28
 #SBATCH -p normal              # queue (partition) -- normal, development, etc.
 #SBATCH -t 48:00:00            # wall time (hh:mm:ss)

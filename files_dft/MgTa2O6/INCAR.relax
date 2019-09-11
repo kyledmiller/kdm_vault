@@ -16,7 +16,7 @@ NELM = 60      # Maximum number of electronic steps before giving up
 #NELECT-flag
 
 # High prec for force calculations
-#ENAUG = 1
+ENAUG = 1
 ADDGRID = .TRUE.
 
 # Density of States Info
@@ -51,7 +51,7 @@ LREAL = .FALSE. # real space projection; disable for higher accuracy in forces
 #LDAUJ = 0 0 0
 LMAXMIX = 4     # Apply to d-orbitals
 #LDAUPRINT = 1   # Verbosity of output
-#LASPH = .TRUE.  # include non-spherical contributions from the gradient corrections inside the PAW spheres
+LASPH = .TRUE.  # include non-spherical contributions from the gradient corrections inside the PAW spheres
 
 # Relaxation parameters
 NSW = 1000 # number of ionic steps
@@ -66,6 +66,7 @@ ISPIN = 2 # Turn on collinear magnetism
 
 #Parallelization
 #LPLANE = .TRUE.
-NPAR = 7  # Parallelize over bands. Should be factor of number of cores
+NPAR = 16  # Parallelize over bands. Should be factor of number of cores
+KPAR = 2
 #LSCALU = .FALSE.
 #NSIM = 4
