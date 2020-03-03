@@ -15,8 +15,8 @@
 
 # Generate the required versions of the INCAR for each relaxation step
 fname=INCAR.relax
-sed -e "s/ISIF\s=\s../ISIF\ =\ 7\ /" -e "s/IBRION\s=\s../IBRION\ =\ 2\ /" $fname > INCAR.is7.ib2
-sed -e "s/ISIF\s=\s../ISIF\ =\ 7\ /" -e "s/IBRION\s=\s../IBRION\ =\ 1\ /" $fname > INCAR.is7.ib1
+sed -e "s/ISIF\s=\s../ISIF\ =\ 7\ /" -e "s/IBRION\s=\s../IBRION\ =\ 2\ /" -e "s/EDIFFG/#EDIFFG/" $fname > INCAR.is7.ib2
+sed -e "s/ISIF\s=\s../ISIF\ =\ 7\ /" -e "s/IBRION\s=\s../IBRION\ =\ 1\ /" -e "s/EDIFFG/#EDIFFG/" $fname > INCAR.is7.ib1
 sed -e "s/ISIF\s=\s../ISIF\ =\ 2\ /" -e "s/IBRION\s=\s../IBRION\ =\ 2\ /" $fname > INCAR.is2.ib2
 sed -e "s/ISIF\s=\s../ISIF\ =\ 2\ /" -e "s/IBRION\s=\s../IBRION\ =\ 1\ /" $fname > INCAR.is2.ib1
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 writeDir=output_files
-writeFile=stats.txt
+writeFile=stats.tsv
 
 echo "ISPIN =" 
 read ISPIN

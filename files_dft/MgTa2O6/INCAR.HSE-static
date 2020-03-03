@@ -31,7 +31,7 @@ HFSCREEN = 0.2
 
 # BZ Integrations
 ISMEAR = 0 # 0=Gaussian, -5=Tetrahedron method
-SIGMA = 0.1 # Smearing width for Gaussian in eV
+SIGMA = 0.01 # Smearing width for Gaussian in eV
 
 # Calculation Details
 LWAVE = .TRUE. # Do we want to write the wavefunctions (usually in GB)
@@ -53,7 +53,7 @@ ISPIN = 2 # Turn on collinear magnetism
 
 #Parallelization
 #LPLANE = .TRUE.
-NPAR = 16  # Parallelize over bands. Should be factor of number of cores
+NPAR = 14  # Parallelize over bands. Should be factor of number of cores
 #KPAR = 2
 #LSCALU = .FALSE.
 #NSIM = 4

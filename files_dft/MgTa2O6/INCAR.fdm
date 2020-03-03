@@ -11,6 +11,7 @@ EDIFF = 1e-8   # Difference in energy allowed before electronic convergence
 ALGO = FAST  # stable blocked Davidson scheme
 NELM = 100      # Maximum number of electronic steps before giving up
 #NELMDL = 3    # Number of non-selfconsistent electronic steps at start
+LORBIT = 11
 
 #NELECT-flag 	# for use with sed
 
@@ -18,7 +19,7 @@ NELM = 100      # Maximum number of electronic steps before giving up
 ADDGRID = .TRUE.
 IMIX = 1
 #IALGO = 48
-AMIX = 0.2 	# lower mixing for wavefunc convergence
+#AMIX = 0.2 	# lower mixing for wavefunc convergence
 
 # BZ Integrations
 ISMEAR = 0 # 0=Gaussian, -5=Tetrahedron method
@@ -28,7 +29,7 @@ SIGMA = 0.1 # Smearing width for Gaussian in eV
 LWAVE = .FALSE. # Do we want to write the wavefunctions (usually in GB)
 LCHARG = .FALSE. # Do we want to write the charge density (usually <1GB)
 PREC = Accurate # Accurate FFT grid
-ENCUT = encutVAR # Plane wave energy cutoff
+ENCUT = 800 # Plane wave energy cutoff
 LREAL = .FALSE. # real space projection; disable for higher accuracy in forces
 
 # Relaxation parameters
@@ -46,7 +47,7 @@ IBRION = -1 # Newtonian method for mini_opt
 #LDAUJ = 0 0 0
 #LMAXMIX = 4     # Apply to d-orbitals
 #LDAUPRINT = 1   # Verbosity of output
-#LASPH = .TRUE.  # include non-spherical contributions from the gradient corrections inside the PAW spheres
+LASPH = .TRUE.  # include non-spherical contributions from the gradient corrections inside the PAW spheres
 
 
 #Magnetism
@@ -56,6 +57,7 @@ ISPIN = 2 # Turn on collinear magnetism
 
 #Parallelization
 #LPLANE = .TRUE.
-NPAR = 7  # Parallelize over bands. Should be factor of number of cores
+NPAR = 2  # Parallelize over bands. Should be factor of number of cores
+KPAR = 2
 #LSCALU = .FALSE.
 #NSIM = 4

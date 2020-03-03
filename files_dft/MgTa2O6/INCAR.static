@@ -12,20 +12,20 @@ ALGO = FAST  # stable blocked Davidson scheme
 NELM = 80      # Maximum number of electronic steps before giving up
 #NELMDL = 3    # Number of non-selfconsistent electronic steps at start
 
-NELECT = 496
+#NELECT-flag
 
 # High prec for force calculations
-ENAUG = 1
+#ENAUG = 1
 ADDGRID = .TRUE.
 
 LORBIT = 11    # Project DOS onto individual atoms' orbitals
 
 # BZ Integrations
-ISMEAR = 0 # 0=Gaussian, -5=Tetrahedron method
-SIGMA = 0.1 # Smearing width for Gaussian in eV
+ISMEAR = -5 # 0=Gaussian, -5=Tetrahedron method
+#SIGMA = 0.1 # Smearing width for Gaussian in eV
 
 # Calculation Details
-LWAVE = .TRUE. # Do we want to write the wavefunctions (usually in GB)
+LWAVE = .FALSE. # Do we want to write the wavefunctions (usually in GB)
 LCHARG = .TRUE. # Do we want to write the charge density (usually <1GB)
 PREC = Accurate # Accurate FFT grid
 ENCUT = 800 # Plane wave energy cutoff
@@ -45,7 +45,7 @@ ISPIN = 2 # Turn on collinear magnetism
 
 #Parallelization
 #LPLANE = .TRUE.
-NPAR = 14  # Parallelize over bands. Should be factor of number of cores
+NPAR = 2  # Parallelize over bands. Should be factor of number of cores
 KPAR = 2
 #LSCALU = .FALSE.
 #NSIM = 4

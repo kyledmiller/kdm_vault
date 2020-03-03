@@ -13,7 +13,7 @@ NELM = 100      # Maximum number of electronic steps before giving up
 NELMIN=5
 #NELMDL = 3    # Number of non-selfconsistent electronic steps at start
 
-NELECT = 122.6
+#NELECT-flag
 
 # PARCHG settings
 LPARD = .TRUE.
@@ -44,7 +44,7 @@ HFSCREEN = 0.2
 
 # BZ Integrations
 ISMEAR = 0 # 0=Gaussian, -5=Tetrahedron method
-SIGMA = 0.1 # Smearing width for Gaussian in eV
+SIGMA = 0.01 # Smearing width for Gaussian in eV
 
 # Calculation Details
 LWAVE = .FALSE. # Do we want to write the wavefunctions (usually in GB)

@@ -1,12 +1,12 @@
 #!/bin/bash
 #SBATCH -A p30883        # which account to debit hours from
-#SBATCH -J srlx               # job name
+#SBATCH -J name-flag               # job name
 #SBATCH -o slurm.o%j           # output and error file name (%j expands to jobID) 
 #SBATCH -e slurm.e%j           # output and error file name (%j expands to jobID) 
 #SBATCH -N 8
 #SBATCH --ntasks-per-node=28
 #SBATCH -p short              # queue (partition) -- normal, development, etc.
-#SBATCH -t 3:58:00            # wall time (hh:mm:ss)
+#SBATCH -t 4:00:00            # wall time (hh:mm:ss)
 #SBATCH --mail-user=kmiller@u.northwestern.edu 
 #SBATCH --mail-type=end        # email when job ends
 

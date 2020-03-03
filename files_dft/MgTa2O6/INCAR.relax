@@ -16,7 +16,7 @@ NELM = 60      # Maximum number of electronic steps before giving up
 #NELECT-flag
 
 # High prec for force calculations
-ENAUG = 1
+#ENAUG = 1
 ADDGRID = .TRUE.
 
 # Density of States Info
@@ -24,7 +24,7 @@ ADDGRID = .TRUE.
 #EMIN = -15
 #EMAX = 15
 
-LORBIT = 11    # Project DOS onto individual atoms' orbitals (see mag moms)
+LORBIT = 11    # print magnetic moments and project DOS onto individual atoms' orbitals (see mag moms)
 
 # BZ Integrations
 ISMEAR = 0
@@ -66,7 +66,7 @@ ISPIN = 2 # Turn on collinear magnetism
 
 #Parallelization
 #LPLANE = .TRUE.
-NPAR = 16  # Parallelize over bands. Should be factor of number of cores
-KPAR = 2
+NPAR = 4  # Parallelize over bands. Should be factor of number of cores
+KPAR = 4
 #LSCALU = .FALSE.
 #NSIM = 4

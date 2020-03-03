@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH -A p30883        # which account to debit hours from
-#SBATCH -J static               # job name
+#SBATCH -J name-flag               # job name
 #SBATCH -o slurm.o%j           # output and error file name (%j expands to jobID) 
 #SBATCH -e slurm.e%j           # output and error file name (%j expands to jobID) 
-#SBATCH -N 4
+#SBATCH -N 1
 #SBATCH --ntasks-per-node=28
 #SBATCH -p short              # queue (partition) -- normal, development, etc.
 #SBATCH -t 4:00:00            # wall time (hh:mm:ss)

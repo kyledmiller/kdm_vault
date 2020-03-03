@@ -50,7 +50,7 @@ LREAL = .FALSE. # real space projection; disable for higher accuracy in forces
 #LDAUJ = 0 0 0
 LMAXMIX = 4     # Apply to d-orbitals
 #LDAUPRINT = 1   # Verbosity of output
-#LASPH = .TRUE.  # include non-spherical contributions from the gradient corrections inside the PAW spheres
+LASPH = .TRUE.  # include non-spherical contributions from the gradient corrections inside the PAW spheres
 
 # Relaxation parameters
 NSW = 0 # number of ionic steps

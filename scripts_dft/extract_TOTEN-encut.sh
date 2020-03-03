@@ -1,9 +1,15 @@
 #!/bin/bash
 writefile=energies.txt
-for i in $(seq 600 100 1200);
 
+printf "ENCUT\tTotal Energy\tCPU time\n"            >> $writefile
+
+for i in $(seq 400 100 900);
 do
-        printf $i 			>> $writefile
-        grep TOTEN $i/OUTCAR | tail -1 	>> $writefile
+	file=$i/OUTCAR
+        printf $i"\t"			            >> $writefile
+        #grep TOTEN $i/OUTCAR | tail -1              >> $writefile
+	tac $file | awk '/TOTEN/{printf $5"\t"; exit}' >> $writefile
+	awk '/CPU time/{printf $6"\n"}' $i/OUTCAR        >> $writefile
+
 done
 

@@ -27,8 +27,8 @@ LORBIT = 11    # Project DOS onto individual atoms' orbitals
 #NBANDS = 60
 
 # BZ Integrations
-ISMEAR = 0 # 0=Gaussian, -5=Tetrahedron method
-SIGMA = 0.1 # Smearing width for Gaussian in eV
+ISMEAR = -5 # 0=Gaussian, -5=Tetrahedron method
+#SIGMA = 0.1 # Smearing width for Gaussian in eV
 
 #Mixing
 #AMIX = 0.2

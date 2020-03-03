@@ -21,8 +21,8 @@ ADDGRID = .TRUE.
 LORBIT = 11    # Project DOS onto individual atoms' orbitals
 
 # BZ Integrations
-ISMEAR = 0 # 0=Gaussian, -5=Tetrahedron method
-SIGMA = 0.1 # Smearing width for Gaussian in eV
+ISMEAR = -5 # 0=Gaussian, -5=Tetrahedron method
+#SIGMA = 0.1 # Smearing width for Gaussian in eV
 
 # Calculation Details
 LWAVE = .FALSE. # Do we want to write the wavefunctions (usually in GB)

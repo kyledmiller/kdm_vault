@@ -8,12 +8,12 @@ INIWAV =      1  #  electr: 0-lowe 1-rand
 # Convergence tolerance
 EDIFF = 1e-7   # Difference in energy allowed before electronic convergence
 #SYMPREC = 1e-4 # Precision in finding symmetry of structure
-ALGO = ALL  # stable blocked Davidson scheme
-NELM = 100      # Maximum number of electronic steps before giving up
+ALGO = Damped  # stable blocked Davidson scheme
+NELM = 150      # Maximum number of electronic steps before giving up
 NELMIN=5
 #NELMDL = 3    # Number of non-selfconsistent electronic steps at start
 
-#NELECT = NELECT-flag
+#NELECT-flag
 
 # DOS settings
 #NEDOS = 3001   # Increase for high resolution DOS plots
@@ -40,7 +40,7 @@ HFSCREEN = 0.2
 
 # BZ Integrations
 ISMEAR = 0 # 0=Gaussian, -5=Tetrahedron method
-SIGMA = 0.1 # Smearing width for Gaussian in eV
+SIGMA = 0.01 # Smearing width for Gaussian in eV
 
 # Calculation Details
 LWAVE = .FALSE. # Do we want to write the wavefunctions (usually in GB)
@@ -62,13 +62,13 @@ ISPIN = 2 # Turn on collinear magnetism
 
 #Parallelization
 #LPLANE = .TRUE.
-NPAR = 16  # Parallelize over bands. Should be factor of number of cores
-#KPAR = 2
+NPAR = 8  # Parallelize over bands. Should be factor of number of cores
+KPAR = 4
 #LSCALU = .FALSE.
 #NSIM = 4
 
 #Mixing
-#AMIX = 0.2
-#BMIX = 0.0001
+AMIX = 0.2
+BMIX = 0.0001
 #AMIX_MAG = 0.8
 #BMIX_MAG = 0.0001

@@ -1,9 +1,14 @@
 #!/bin/bash
 var=kpt
 writefile=energies.txt
+
+printf "ENCUT\tTotal Energy\tCPU time\n"            	>> $writefile
+
 for outfile in $(find . -wholename '*/OUTCAR' |sort); 
-do    
-        printf "${outfile:5:3}" 				>> $writefile
+do     
 	echo ${outfile:2}
-	grep TOTEN $outfile | tail -1 | awk '{print "\t"$5}' 	>> $writefile
+        echo -n -e "${outfile:6:8}\t"				>> $writefile
+        tac $outfile | awk '/TOTEN/{printf $5"\t"; exit}' 	>> $writefile
+        awk '/CPU time/{printf $6"\n"}' $outfile       >> $writefile
+	
 done

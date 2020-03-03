@@ -1,20 +1,44 @@
 #!/bin/bash
-encut=600
-#kpt='3 5 5'
-#nedos=301
-#emin=-8
-#emax=14
 
 suffix=fdm
 
-cp ~/files_dft/MgTa2O6/INCAR.$suffix .	
-#cp ~/files_dft/MgTa2O6/POSCAR.relaxed .
-#cp POSCAR.relaxed POSCAR
-cp ~/files_dft/MgTa2O6/POTCAR .
-cp ~/files_dft/MgTa2O6/KPOINTS.PHON .
-cp ~/scripts_dft/sub-static.sh .
-cp ~/scripts_dft/batch_sub-FDM.sh .
+if [ -z "$1" ]
+	then
+	echo "I need one argument: how many displacements there are."
+	exit 1
+fi
 
-sed -i -e "s/encutVAR/$encut/g" INCAR.$suffix
-#sed -i -e "4s/.*/$kpt/" KPOINTS
+numdisp=$1
 
+
+#cp INCAR.$suffix INCAR
+
+#if [ -e ./POSCAR-001 ]; then
+#	echo "Looks like you have you Phonopy files already in place. Moving on..."
+#else
+#	echo "Can't find Phonopy displacement files. Tsk, tsk."
+#	exit 1
+#fi
+
+for iter in $(seq 1 $numdisp);do
+	mkdir $iter
+	if [ $iter -gt 9 ]; then
+		mv POSCAR-0$iter $iter/POSCAR
+	else
+		mv POSCAR-00$iter $iter/POSCAR
+	fi
+	cp sub-static.sh $iter/		
+	cp POTCAR $iter/
+	cp KPOINTS $iter/
+	cp INCAR.$suffix $iter/INCAR
+	cp CHGCAR $iter
+done
+
+noDisp=unmod
+mkdir $noDisp
+cp SPOSCAR $noDisp/POSCAR
+cp sub-static.sh $noDisp
+cp KPOINTS $noDisp
+cp POTCAR $noDisp
+cp INCAR.$suffix $noDisp/INCAR
+sed -i 's/LCHARG = .FALSE./LCHARG = .TRUE./' $noDisp/INCAR

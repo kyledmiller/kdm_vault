@@ -1,5 +1,5 @@
 #!/bin/bash
-src='../serial-relax'
+src='../relax'
 #encut=800
 #kpt='3 5 5'
 #nedos=301
@@ -9,6 +9,7 @@ src='../serial-relax'
 cp $src/POTCAR .
 cp $src/POSCAR .
 cp $src/KPOINTS .
+cp $src/CHGCAR .
 cp ~/files_dft/MgTa2O6/INCAR.static INCAR	
 cp ~/scripts_dft/sub-static.sh .
 
