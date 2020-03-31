@@ -9,60 +9,75 @@
 # sub-estruc.sh
 #######################################
 
-src=relax
-in=input_files
+in='input_files'
 
-encut=800
+encut=600
 
 nedos=3001
 emin=-8	
 emax=16
 
-#for iter in 0 10 20 30 40;do
-for iter in 'dimer' 'no-dimer';do
+static=1
+dos=1
+bands=1
+
+U=5
+
+for iter in 0 4 8 12 16 20;do
 
 	#nelect=${iter:0:5}
 	#fname=${iter:6}
 	fname=$iter
 
-	poscar="../../$src/$fname/POSCAR"
+	poscar="../../../phonons-U5/mod-strucs/MPOSCAR-X0-disp$iter.vasp"
 
 	mkdir $fname
 	cd $fname
 
 	cp ../$in/sub-estruc.sh .
+        sed -i "s/static=./static=$static/"  sub-estruc.sh
+        sed -i "s/dos=./dos=$dos/"           sub-estruc.sh
+        sed -i "s/bands=./bands=$bands/"     sub-estruc.sh
 
+
+if [ $static -eq 1 ]; then
 	### SCF Calculation
 	mkdir static
 	cd static
 	cp ../../$in/INCAR.static INCAR   
+	sed -i "s/U-flag/$U/" INCAR 
 	cp $poscar POSCAR
 	cp ../../$in/POTCAR .
 	cp ../../$in/KPOINTS .
+	cp ../../$in/CHGCAR .
 	cd ..
-
+fi
+if [ $dos -eq 1 ]; then
 	### Density of States
 	mkdir elec_dos
 	cd elec_dos
 	cp ../../$in/INCAR.dos INCAR   
+	sed -i "s/U-flag/$U/" INCAR 
 	cp $poscar POSCAR
 	cp ../../$in/POTCAR .
 	cp ../../$in/KPOINTS .
         sed -i -e "s/encutVAR/$encut/g" -e "s/nedosVAR/$nedos/g" INCAR
         sed -i -e "s/eminVAR/$emin/g" -e "s/emaxVAR/$emax/g" INCAR
 	cd ..	
-	
+fi
+if [ $bands -eq 1 ]; then
 	### Band Structure
 	mkdir elec_bands
 	cd elec_bands
-	cp ../../$in/INCAR.bands INCAR   
+	cp ../../$in/INCAR.bands INCAR  
+	sed -i "s/U-flag/$U/" INCAR 
 	cp $poscar POSCAR
 	cp ../../$in/POTCAR .
 	cp ../../$in/KPOINTS.bands KPOINTS
         sed -i -e "s/encutVAR/$encut/g" -e "s/nedosVAR/$nedos/g" INCAR
         sed -i -e "s/eminVAR/$emin/g" -e "s/emaxVAR/$emax/g" INCAR
 	cd ..
-
+fi
 	cd ..	
 done
 

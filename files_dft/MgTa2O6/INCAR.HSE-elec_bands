@@ -6,7 +6,7 @@ ICHARG =      11  #  charge: 1-file 2-atom 10-const
 INIWAV =      1  #  electr: 0-lowe 1-rand
 
 # Convergence tolerance
-EDIFF = 1e-7   # Difference in energy allowed before electronic convergence
+EDIFF = 1e-6   # Difference in energy allowed before electronic convergence
 #SYMPREC = 1e-4 # Precision in finding symmetry of structure
 ALGO = Damped  # stable blocked Davidson scheme
 NELM = 150      # Maximum number of electronic steps before giving up

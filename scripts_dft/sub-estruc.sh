@@ -38,7 +38,7 @@ if [ $dos -eq 1 ]; then
 	cd elec_dos
 	cp ../static/CHGCAR .
 	mpirun -n $SLURM_NTASKS /projects/b1027/VASPmod.5.4.4/vasp_std > $outfile
-	cp vasprun.xml ../$out/vasprun-dos.xml
+	#cp vasprun.xml ../$out/vasprun-dos.xml
 	cd ..
 fi
 
@@ -48,7 +48,7 @@ if [ $bands -eq 1 ]; then
 	cd elec_bands
 	cp ../static/CHGCAR .
 	mpirun -n $SLURM_NTASKS /projects/b1027/VASPmod.5.4.4/vasp_std > $outfile
-	cp vasprun.xml ../$out/vasprun-bands.xml
-	cp KPOINTS ../$out/KPOINTS.bands
+	#cp vasprun.xml ../$out/vasprun-bands.xml
+	#cp KPOINTS ../$out/KPOINTS.bands
 	cd ..
 fi

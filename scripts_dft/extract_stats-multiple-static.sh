@@ -6,26 +6,22 @@ writeFile=stats.tsv
 echo "ISPIN =" 
 read ISPIN
 
-mkdir $writeDir
+#mkdir $writeDir
 
-#for outfile in $(find . -wholename '*/final-OUTCAR' |sort);
 if [ $ISPIN -eq 2 ];then
-	printf "Run ID\tTotal Energy\tDrift in x\tDrift in y\tDrift in z\tVolume\tMag s\t Mag p \t Mag d\t Mag tot\n" >> $writeFile
+	printf "Run ID\tTotal Energy\tVolume\tMag s\t Mag p \t Mag d\t Mag tot\n" >> $writeFile
 else
-	printf "Run ID\tTotal Energy\tDrift in x\tDrift in y\tDrift in z\tVolume\n" >> $writeFile
+	printf "Run ID\tTotal Energy\tVolume\n" >> $writeFile
 fi
 
-for suffix in 'd0' 'd025' 'd05' 'd075' 'd1';do    
-#for suffix in 'unmod' 'G1' 'R1' 'X1' 'Z1';do
-#for suffix in 'G1' 'R1' 'X1' 'Z1';do
-
-        outfile="$suffix"/OUTCAR
-	printf "$suffix" >> $writeFile
-	echo $suffix
+for outfile in $(find . -wholename '*/static/OUTCAR' | sort);do
+#for func in PS PBE;do
+#for struc in og rlx 5a;do
+#	suffix=$func-$struc
+#        outfile="$suffix"/static/OUTCAR
+	printf "$outfile" >> $writeFile
+	echo $outfile
 	grep TOTEN $outfile | tail -1 | awk '{printf "\t"$5; exit}' >> $writeFile
-	tac $outfile | awk '/drift/ {printf "\t"$3; exit}' >> $writeFile 
-	tac $outfile | awk '/drift/ {printf "\t"$4; exit}' >> $writeFile 
-        tac $outfile | awk '/drift/ {printf "\t"$5; exit}' >> $writeFile
 
         if [ $ISPIN -eq 2 ];then
                 tac $outfile | awk '/volume/ {printf "\t"$5; exit}' >> $writeFile
@@ -37,6 +33,4 @@ for suffix in 'd0' 'd025' 'd05' 'd075' 'd1';do
 	else
         	tac $outfile | awk '/volume/ {printf "\t"$5"\n"; exit}' >> $writeFile
 	fi
-	
 done
-cp $writeFile $writeDir
