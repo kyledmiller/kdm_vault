@@ -1,0 +1,137 @@
+#V_Sim parameters file v3.0
+#====================
+
+#WARNING: this file format is DIFFERENT from that for
+#standard v_sim version <= 2.x
+
+#Line beginning with a # are not parsed.
+
+#The only "useful" lines must have the following pattern:
+#parameter_name: value
+
+#The following parameter names are valid :
+# main_resourcesPath
+# scale_log_threshold
+# rendering_favoriteMethod
+# atomic_sphere_method
+# opengl_trueTransparency
+# opengl_antialias
+# opengl_immediateDrawing
+# opengl_stereoAngle
+# opengl_stereo
+# opengl_observe_method
+# opengl_prefered_camera_orientation
+# extension_render
+# wire_nonLinear
+# wire_shade
+# main_unit
+# opengl_render
+# opengl_details
+# main_usePreview
+# main_confirmQuit
+# main_panelStatus
+# main_dock
+# config_showReducedCoordinates
+# config_autoAdjustCamera
+# browser_headersVisibility
+# browser_dateVisibility
+# dataFile_fileExtension
+# config_subPanelTabView
+# config_skin
+# config_refreshIsOn
+# config_refreshPeriod
+# presetShade
+
+# Favorite paths to find and save the resources file ; chain[:chain]
+main_resourcesPath: /home/kdmiller/.config/v_sim
+
+# Value of the threshold used in the zero centred TOOL_MATRIX_SCALING_LOG scaling function ; a positive float (1e-3)
+scale_log_threshold: 0.001000
+
+# Favorite method used to render files ; chain
+rendering_favoriteMethod: Atom visualisation
+
+# The sphere drawing method, [GluSphere Icosahedron]
+atomic_sphere_method: GluSphere
+
+# If true, lines are drawn smoother ; boolean 0 or 1
+opengl_antialias: 1
+
+# If true, changes of parameters means immediate redrawing ; boolean 0 or 1
+opengl_immediateDrawing: 1
+
+# If true, the transparency rendering is enhanced ; boolean 0 or 1
+opengl_trueTransparency: 0
+
+# If true, try to draw in stereo ; boolean 0 or 1
+opengl_stereo: 0
+
+# Give the angle of the two receivers in stereo output ; float positive
+opengl_stereoAngle: 5.000000
+
+# Choose the observe method ; integer (0: constrained mode, 1: walker mode)
+opengl_observe_method[gtk]: 0
+
+# Rules the way OpenGl draws extensions (see opengl_render); name (string) value (string)
+
+# Rules the way OpenGl draws objects in general ; 4 possible strings : VISU_GL_RENDERING_WIREFRAME, VISU_GL_RENDERING_FLAT, VISU_GL_RENDERING_SMOOTH and VISU_GL_RENDERING_SMOOTH_AND_EDGE
+opengl_render: Smooth
+
+# Give a value to the quality of rendering (100 is normal) ; positive integer
+opengl_details: 100
+
+# Automatically compute preview in filechooser ; boolean
+main_usePreview[gtk]: 1
+
+# Show up a dialog to confirm when quit button is clicked ; boolean 0 or 1
+main_confirmQuit[gtk]: 1
+
+# Attach a panel to a tool window ; panel_name window_name (or None or Main)
+main_panelStatus[gtk]: Panel_configuration Main
+main_panelStatus[gtk]: Panel_opengl Main
+main_panelStatus[gtk]: Panel_method Main
+main_panelStatus[gtk]: Panel_map Main
+main_panelStatus[gtk]: Panel_surfaces Main
+main_panelStatus[gtk]: Panel_planes Main
+main_panelStatus[gtk]: Panel_colorise Main
+main_panelStatus[gtk]: Panel_geometry Main
+main_panelStatus[gtk]: Panel_fog_and_bg_color Main
+main_panelStatus[gtk]: Panel_axes Main
+main_panelStatus[gtk]: Panel_elements Main
+main_panelStatus[gtk]: Panel_browser Dock window (2)
+main_panelStatus[gtk]: panel_Vibration Dock window (1)
+
+# Define the characteristic of a dock window ; visibility size(x,y) position(w,h) window_name
+main_dock[gtk]: 1 1052x617 321x365 Dock window (1)
+main_dock[gtk]: 1 967x68 505x508 Dock window (2)
+
+# Display coordinates in reduced values when picking a node ; boolean 0 or 1
+config_showReducedCoordinates[gtk]: 0
+
+# Auto adjust zoom capability for the box to be full size at zoom level 1 ; boolean 0 or 1
+config_autoAdjustCamera[gtk]: 1
+
+# Show or hide the headers in the treeview ; boolean 0 or 1
+browser_headersVisibility[gtk]: 0
+
+# Show or hide the date column in the treeview ; boolean 0 or 1
+browser_dateVisibility[gtk]: 0
+
+# The extension used for data file ; chain e.g. '.dat'
+dataFile_fileExtension[gtk]: .dat
+
+# See or not the labels on tabs ; boolean 0 or 1
+config_subPanelTabView[gtk]: 0
+
+# Path to a gtkrc file ; chain
+config_skin[gtk]: None
+
+# When on V_Sim reloads the file at periodic time ; boolean 0 or 1
+config_refreshIsOn[gtk]: 0
+
+# The period of reloading in ms ; integer (10 < v < 10000)
+config_refreshPeriod[gtk]: 2000
+
+# The id of a shade used as preset one in the shade selectors ; an integer ranging from 0
+presetShade[gtk]: 0
+
