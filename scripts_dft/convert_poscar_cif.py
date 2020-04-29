@@ -8,15 +8,17 @@ from pymatgen.core.structure import Structure
 import sys
 
 def main():
+    SYMPREC = 1e-4
+    ANGLE_TOL = 0.1
     file_names = sys.argv[1:]
     for file_name in file_names:
         struc = Structure.from_file(file_name)
-        prim = struc.get_primitive_structure(tolerance=0.000001)
-        print(f'{file_name},  SG = ' + str(struc.get_space_group_info(symprec=0.000001, angle_tolerance=0.1)))
+        prim = struc.get_primitive_structure(tolerance=SYMPREC)
+        print(f'{file_name},  SG = ' + str(struc.get_space_group_info(symprec=SYMPREC, angle_tolerance=ANGLE_TOL)))
         if file_name[-5:] == '.vasp':
-            prim.to(fmt='cif', filename=(file_name[:-5]+'.cif'), symprec=0.1, angle_tolerance=1)
+            prim.to(fmt='cif', filename=(file_name[:-5]+'.cif'), symprec=SYMPREC, angle_tolerance=ANGLE_TOL)
         else:
-            prim.to(fmt='cif', filename=(file_name+'.cif'), symprec=0.000001, angle_tolerance=0.1)
+            prim.to(fmt='cif', filename=(file_name+'.cif'), symprec=SYMPREC, angle_tolerance=ANGLE_TOL)
             
 if __name__ == "__main__":
     main()
