@@ -1,11 +1,14 @@
 #!/bin/bash
 
-#for iter in '1-d0' '1-d05' '1-d1' '3-d0' '3-d05' '3-d1';do
-for u in 0 1 2 3 4 5;do
-	label=U$u
-	scp qaddr:/projects/b1027/KDMiller_work/BaCoS2/PBESol-struc/fixed-vol-relax/$label/final-POSCAR final-POSCAR-$label.vasp
-	scp qaddr:/projects/b1027/KDMiller_work/BaCoS2/PBESol-struc/fixed-vol-relax/$label/final-OUTCAR final-OUTCAR-$label
+loc='qaddr:/projects/b1027/KDMiller_work/BaCoS2/correct_mag/relax'
+for prefix in '' 'exp-';do
+for iter in 3;do
+	label="$prefix"U$iter
 
+	scp $loc/$label/final-POSCAR final-POSCAR-$label.vasp
+	scp $loc/$label/final-OUTCAR final-OUTCAR-$label
+
+	done
 done
-scp qaddr:/projects/b1027/KDMiller_work/BaCoS2/PBESol-struc/fixed-vol-relax/stats.tsv .
+scp $loc/stats.tsv .
 
