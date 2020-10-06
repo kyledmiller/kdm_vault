@@ -1,8 +1,9 @@
 #!/bin/bash
 
-stampede=xaddr:/work/06098/tg853979/stampede2
+xwork=xaddr:/work/06098/tg853979/stampede2
+qwork=qaddr:/projects/b1027/KDMiller_work
 
-scp "$stampede"/BaCoS2_follow-up/relax/products.tar.gz .
+scp "$qwork"/BaCoS2_follow-up/wannier/products.tar.gz .
 
 tar xvfz products.tar.gz
 \mv products/* .
