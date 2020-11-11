@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 """
 @author: Kyle Miller
+Usage: python convert_poscar_cif.py POSCAR-1 POSCAR-2 POSCAR-3
 """
+
 
 from pymatgen.core.structure import Structure
 import sys
