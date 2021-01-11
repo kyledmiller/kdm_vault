@@ -13,14 +13,16 @@ while [ "$1" != "" ]; do
 
 	### Phonon processing ###
 	# Copy in necessary config files
-	conf=anime.conf
+	conf=mod.conf
 	cp $conf $label
 	cd $label
 	
 	# Executes in each system's directory
 	#phonopy -f {1..9}/vasprun.xml
 	phonopy $conf
-
+	printf "\n$label" >> ../soft-mode_SG.txt
+	python ~/scripts_dft/space_group_reader.py MPOSCAR >> ../soft-mode_SG.txt
+	
 	cd ..	
 
         shift
