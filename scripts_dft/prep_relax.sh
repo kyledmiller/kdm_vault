@@ -1,22 +1,13 @@
 #!/bin/bash
 
-#Usage: First establish the appropriate files in files_dft/*compound*
-#	then Call to prepare the given directory for relaxation run
-
-
-# Copy over the necessary files
-#cp ~/files_dft/MgTa2O6/INCAR.relax .
-#cp ~/files_dft/MgTa2O6/POSCAR.relax .
-#cp ~/files_dft/MgTa2O6/POTCAR .
-#cp ~/files_dft/MgTa2O6/KPOINTS .
-#cp ~/scripts_dft/sub-relax.sh .
-#sed -i -e "4s/.*/$kpts/" KPOINTS
-#cp POSCAR.relax POSCAR
-
 # Generate the required versions of the INCAR for each relaxation step
 fname=INCAR.relax
-sed -e "s/ISIF\s=\s../ISIF\ =\ 7\ /" -e "s/IBRION\s=\s../IBRION\ =\ 2\ /" -e "s/EDIFFG/#EDIFFG/" $fname > INCAR.is7.ib2
-sed -e "s/ISIF\s=\s../ISIF\ =\ 7\ /" -e "s/IBRION\s=\s../IBRION\ =\ 1\ /" -e "s/EDIFFG/#EDIFFG/" $fname > INCAR.is7.ib1
-sed -e "s/ISIF\s=\s../ISIF\ =\ 2\ /" -e "s/IBRION\s=\s../IBRION\ =\ 2\ /" $fname > INCAR.is2.ib2
-sed -e "s/ISIF\s=\s../ISIF\ =\ 2\ /" -e "s/IBRION\s=\s../IBRION\ =\ 1\ /" $fname > INCAR.is2.ib1
 
+for isif in 7 2; do
+for ibrion in 2 1; do
+        sed -e "s/ISIF.*/ISIF\ =\ $isif\ /" -e "s/IBRION.*/IBRION\ =\ $ibrion\ /" $fname > INCAR.is"$isif".ib"$ibrion"
+        if [ $isif -eq 7 ];then
+                sed -i "s/EDIFFG.*/EDIFFG = -0.1/" INCAR.is"$isif".ib"$ibrion"
+        fi
+done
+done
