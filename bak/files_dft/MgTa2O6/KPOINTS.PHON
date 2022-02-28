@@ -1,5 +1,0 @@
-Automatic mesh
-0      ! auto k-point generation scheme
-Gamma  ! Monkhorst-pack mesh or Gamma-centered mesh
-4 2 2  ! dimensions
-0 0 0
