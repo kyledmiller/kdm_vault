@@ -10,7 +10,7 @@ import sys
 
 struc_name = sys.argv[1]
 
-struct = pmg.Structure.from_file(struc_name)
+struct = pmg.core.Structure.from_file(struc_name)
 sga = SpacegroupAnalyzer(struct, symprec=1e-5, angle_tolerance=0.1)
 print(f'Found spacegroup {sga.get_space_group_symbol()}')
 struct = sga.get_primitive_standard_structure(international_monoclinic=False)

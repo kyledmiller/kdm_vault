@@ -17,9 +17,9 @@ def main():
         struc = Structure.from_file(file_name)
         print(f'{file_name},  SG = ' + str(struc.get_space_group_info(symprec=SYMPREC, angle_tolerance=ANGLE_TOL)))
         if file_name[-5:] == '.vasp':
-            struc.to(fmt='cif', filename=(file_name[:-5]+'.cif'), symprec=SYMPREC, angle_tolerance=ANGLE_TOL)
+            struc.to(fmt='cif', filename=(file_name[:-5]+'.cif'))
         else:
-            struc.to(fmt='cif', filename=(file_name+'.cif'), symprec=SYMPREC, angle_tolerance=ANGLE_TOL)
+            struc.to(fmt='cif', filename=(file_name+'.cif'))
             
 if __name__ == "__main__":
     main()
