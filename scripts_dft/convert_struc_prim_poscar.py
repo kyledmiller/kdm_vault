@@ -27,8 +27,8 @@ def main():
 
         print(f'{file_name},  SG = ' + str(struc.get_space_group_info(symprec=SYMPREC, angle_tolerance=ANGLE_TOL)))
         if file_name[-5:] == '.vasp':
-            struc.to(fmt='poscar', filename=(file_name[:-5] + f'-prim.vasp'))
+            struc.to(fmt='poscar', filename=(file_name[:-5] + f'_prim.vasp'))
         else:
-            struc.to(fmt='poscar', filename=(file_name + '-prim.vasp'))
+            struc.to(fmt='poscar', filename=(file_name + '_prim.vasp'))
 if __name__ == "__main__":
     main()
