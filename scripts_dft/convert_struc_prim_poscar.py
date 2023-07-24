@@ -4,13 +4,12 @@
 @author: Kyle Miller
 """
 
-import numpy as np
 from pymatgen.core.structure import Structure, Lattice
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
 import sys
 
 def main():
-    SYMPREC = 1e-3
+    SYMPREC = 1e-4
     ANGLE_TOL = 0.1
     file_names = sys.argv[1:]
     for file_name in file_names:
@@ -26,9 +25,8 @@ def main():
         #struc = diag_struc
 
         print(f'{file_name},  SG = ' + str(struc.get_space_group_info(symprec=SYMPREC, angle_tolerance=ANGLE_TOL)))
-        if file_name[-5:] == '.vasp':
-            struc.to(fmt='poscar', filename=(file_name[:-5] + f'_prim.vasp'))
-        else:
-            struc.to(fmt='poscar', filename=(file_name + '_prim.vasp'))
+        out_file_name = file_name.replace('.vasp','').replace('.cif','') + '_prim.vasp'
+        struc.to(fmt='poscar', filename=out_file_name)
+
 if __name__ == "__main__":
     main()

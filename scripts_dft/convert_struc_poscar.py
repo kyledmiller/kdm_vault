@@ -14,10 +14,8 @@ def main():
     for file_name in file_names:
         struc = Structure.from_file(file_name)
         print(f'{file_name},  SG = ' + str(struc.get_space_group_info(symprec=SYMPREC, angle_tolerance=ANGLE_TOL)))
-        if file_name[-4:] == '.cif':
-            struc.to(fmt='poscar', filename=(file_name[:-4]+'.vasp'))
-        else:
-            struc.to(fmt='poscar', filename=(file_name+'.vasp'))
+        out_file_name = file_name.replace('.vasp','').replace('.cif','') + '.vasp'
+        struc.to(fmt='poscar', filename=out_file_name)
             
 if __name__ == "__main__":
     main()
