@@ -19,9 +19,10 @@ def main():
         #sga = SpacegroupAnalyzer(struc)
         #prim = sga.get_symmetrized_structure()
         #prim = struc.get_primitive_structure(tolerance=SYMPREC)
-        print(f'{file_name},  SG = ' + str(struc.get_space_group_info(symprec=SYMPREC, angle_tolerance=ANGLE_TOL)))
         out_file_name = file_name.replace('.vasp','').replace('.cif','') + '_sym.cif'
         cw.write_file(out_file_name)
+        struc = Structure.from_file(out_file_name)
+        print(f'{file_name},  SG = ' + str(struc.get_space_group_info(symprec=SYMPREC, angle_tolerance=ANGLE_TOL)))
             
 if __name__ == "__main__":
     main()
