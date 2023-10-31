@@ -16,7 +16,7 @@ def main():
         struc = Structure.from_file(file_name)
         #struc = struc.get_primitive_structure(tolerance=SYMPREC)
         sga = SpacegroupAnalyzer(struc)
-        prim = sga.get_primitive_standard_structure()
+        struc = sga.get_primitive_standard_structure()
 
         #diag_lattice = Lattice(np.diag(struc.lattice.abc))
         #diag_struc = struc.copy()
