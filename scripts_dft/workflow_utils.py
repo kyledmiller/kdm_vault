@@ -2,9 +2,27 @@ import os
 import shutil
 import glob
 import numpy as np
+from itertools import zip_longest
+import multiprocessing as mp
+import time
+from datetime import datetime, timedelta
+from collections.abc import Sequence 
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
 from pymatgen.core.structure import Structure
 from pymatgen.io.vasp.outputs import Vasprun
+
+
+def sort_sites(struc):
+    """Sort sites of a pymatgen structure by coordinates and species. Useful for ensuring distorted structure variants are comparable/interpolatable.
+    Args:
+        struc (Structure): structure
+    Returns:
+        Structure: sorted structure
+    """
+    coords = np.array(struc.cart_coords)
+    species = np.array(struc.species)
+    sorted_indices = np.lexsort((coords[:,2], coords[:,1], coords[:,0], species))
+    return Structure.from_sites([struc[i] for i in sorted_indices])
 
 
 def gen_mod_struc(phon_dir, labels, kpts, indices, disps, moddims):
@@ -89,22 +107,52 @@ def check_converged(outdir):
         return False
 
 
-def sort_sites(struc):
-    """Sort sites of a pymatgen structure by coordinates and species. Useful for ensuring distorted structure variants are comparable/interpolatable.
-    Args:
-        struc (Structure): structure
-    Returns:
-        Structure: sorted structure
-    """
-    coords = np.array(struc.cart_coords)
-    species = np.array(struc.species)
-    sorted_indices = np.lexsort((coords[:,2], coords[:,1], coords[:,0], species))
-    return Structure.from_sites([struc[i] for i in sorted_indices])
-
-
 def make_primitive(struc_name):
     if not os.path.exists('PPOSCAR'):
         os.system(f'phonopy --symmetry -c {struc_name}')
         shutil.copy('PPOSCAR', 'POSCAR')
     #sga = SpacegroupAnalyzer(struc)
     #struc = sga.get_primitive_standard_structure()
+
+
+def flatten(l):
+    for el in l:
+        if isinstance(el, Sequence) and not isinstance(el, (str, bytes)):
+            yield from flatten(el)
+        else:
+            yield el
+
+
+def path2name(path):
+    return path.split('/')[-1]
+
+
+def exec_parallel(func, args, multi_arg=False, verbose=False):
+    if verbose: start = time.time()
+    with mp.Pool(processes=mp.cpu_count()-1) as pool:
+        if multi_arg:  results = pool.starmap(func, args)
+        else:          results = pool.map(func, args)
+    if verbose: print(f'{func.__name__}: {timedelta(seconds=(time.time()-start))}')
+    return results
+
+
+def grouper(iterable, n, fillvalue=None):
+    "Collect data into fixed-length chunks or blocks"
+    # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx
+    args = [iter(iterable)] * n
+    return zip_longest(fillvalue=fillvalue, *args)
+
+
+def uniquify(seq, id_func=None):
+    """Remove duplicates while preserving order
+    """
+    if id_func is None: 
+        def id_func(x): return x 
+    seen = {} 
+    result = [] 
+    for item in seq: 
+        marker = id_func(item) 
+        if marker in seen: continue 
+        seen[marker] = 1 
+        result.append(item) 
+    return result
