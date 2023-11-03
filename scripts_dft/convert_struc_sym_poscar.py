@@ -7,11 +7,12 @@
 from pymatgen.core.structure import Structure
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
 from pymatgen.io.cif import CifWriter
+from convert_struc_sorted_poscar import sort_sites
 import sys
 import os
 
 def main():
-    SYMPREC = 1e-5
+    SYMPREC = 1e-4
     ANGLE_TOL = 0.1
     file_names = sys.argv[1:]
     for file_name in file_names:
@@ -28,6 +29,7 @@ def main():
             existing = True
         cw.write_file(out_file_name)
         struc = Structure.from_file(out_file_name)
+        struc = sort_sites(struc)
         struc.to(out_file_name.replace('.cif','.vasp'), fmt='poscar')
         if not existing:
             os.remove(out_file_name)

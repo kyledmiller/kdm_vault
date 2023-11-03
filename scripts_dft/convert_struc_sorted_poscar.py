@@ -8,20 +8,7 @@ from pymatgen.core.structure import Structure
 import sys
 import os
 import numpy as np
-
-
-def sort_sites(struc):
-    """Sort sites of a pymatgen structure by coordinates and species. Useful for ensuring distorted structure variants are comparable/interpolatable.
-    Args:
-        struc (Structure): structure
-    Returns:
-        Structure: sorted structure
-    """
-
-    coords = np.array(struc.cart_coords)
-    species = np.array(struc.species)
-    sorted_indices = np.lexsort((coords[:,2], coords[:,1], coords[:,0], species))
-    return Structure.from_sites([struc[i] for i in sorted_indices])
+from workflow_utils import sort_sites
 
 
 def main():
