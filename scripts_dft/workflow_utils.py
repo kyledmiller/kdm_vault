@@ -21,7 +21,7 @@ def sort_sites(struc):
     """
     coords = np.array(struc.cart_coords)
     species = np.array(struc.species)
-    sorted_indices = np.lexsort((coords[:,2], coords[:,1], coords[:,0], species))
+    sorted_indices = np.lexsort((coords[:,0], coords[:,1], coords[:,2], species))
     return Structure.from_sites([struc[i] for i in sorted_indices])
 
 
