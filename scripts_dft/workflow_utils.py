@@ -50,6 +50,7 @@ def gen_mod_struc(phon_dir, labels, kpts, indices, disps, moddims):
     with open('mod.conf', 'w+') as f:
         shutil.copy(f'{phon_dir}/phonopy_disp.yaml', '.')
         shutil.copy(f'{phon_dir}/FORCE_SETS', '.')
+        f.write('FC_SYMMETRY = .TRUE.\n')
         moddim_str = " ".join([str(i) for i in moddims])
         mod_line = f'MODULATION = {moddim_str}'
         for kpt, index, disp in zip(kpts, indices, disps):
