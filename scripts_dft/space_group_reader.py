@@ -1,5 +1,5 @@
 from pymatgen.symmetry.analyzer import SpacegroupAnalyzer as sga
-from pymatgen.core.structure import IStructure
+from pymatgen.core.structure import Structure
 import sys
 from workflow_utils import check_symmetry
 
