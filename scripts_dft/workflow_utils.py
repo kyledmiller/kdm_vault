@@ -41,8 +41,10 @@ def gen_mod_struc(phon_dir, labels, kpts, indices, disps, moddims):
     """
     og_dir = os.getcwd()
     mods = [f'{label}{index}' for label,index in zip(labels,indices)]
-    subdir = f'mod_{"_".join(mods)}'
     moddir = '/'.join(phon_dir.split('/')[:-1] + ['modulation'])
+    phon_tag = phon_dir.split('/')[-1] 
+    subdir = f'mod_{phon_tag}_{"_".join(mods)}'
+    os.makedirs(moddir, exist_ok=True)
     os.chdir(moddir)
     os.makedirs(subdir, exist_ok=True)
     os.chdir(subdir)
