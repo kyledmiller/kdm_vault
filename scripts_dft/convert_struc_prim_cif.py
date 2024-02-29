@@ -14,7 +14,7 @@ def main():
     file_names = sys.argv[1:]
     for file_name in file_names:
         struc = Structure.from_file(file_name)
-        sga = SpacegroupAnalyzer(struc)
+        sga = SpacegroupAnalyzer(struc,symprec=SYMPREC)
         struc = sga.get_primitive_standard_structure()
         #prim = struc.get_primitive_structure(tolerance=SYMPREC)
         print(f'{file_name},  SG = ' + str(struc.get_space_group_info(symprec=SYMPREC, angle_tolerance=ANGLE_TOL)))

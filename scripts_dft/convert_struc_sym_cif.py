@@ -10,7 +10,7 @@ from pymatgen.io.cif import CifWriter
 import sys
 
 def main():
-    SYMPREC = 1e-4
+    SYMPREC = 1e-6
     ANGLE_TOL = 0.1
     file_names = sys.argv[1:]
     for file_name in file_names:
