@@ -12,16 +12,30 @@ from pymatgen.core.structure import Structure
 from pymatgen.io.vasp.outputs import Vasprun
 
 
-def sort_sites(struc):
+def sort_sites(struc, unwrap_tol=0.05):
     """Sort sites of a pymatgen structure by coordinates and species. Useful for ensuring distorted structure variants are comparable/interpolatable.
     Args:
         struc (Structure): structure
+        unwrap_tol (float): maximum distance from upper edge of unit cell
+                            below which sites will be unwrapped to negative 
+                            coordinates (fractional units) 
     Returns:
         Structure: sorted structure
     """
-    coords = np.array(struc.cart_coords)
+    #abc = struc.lattice.lengths
+    coords = np.array(struc.frac_coords)
+
+    ### Wrap very high coords to negative to avoid sort errors
+    for i in range(coords.shape[0]):
+        for j in range(coords.shape[1]):
+            if coords[i,j] + unwrap_tol >= 1:
+                #print(f'sort_sites: at edge: {coords[i,j]}')
+                coords[i,j] = coords[i,j] - 1 
+                #print(f'sort_sites: wrapped: {coords[i,j]}')
     species = np.array(struc.species)
     sorted_indices = np.lexsort((coords[:,0], coords[:,1], coords[:,2], species))
+    #print(abc)
+    #print(coords)
     return Structure.from_sites([struc[i] for i in sorted_indices])
 
 
@@ -102,12 +116,26 @@ def check_converged(outdir):
     """
     try:
         if Vasprun(f'{outdir}/vasprun.xml', parse_dos=False, parse_eigen=False,
-                   parse_potcar_file=False, exception_on_bad_xml=True
+                   parse_potcar_file=False, exception_on_bad_xml=False
                    ).converged:
             return True
         else: return False
-    except: 
-        return False
+    except: return False
+
+
+def check_converged_detailed(outdir, verbose=False):
+    """Returns {'elec':converged_electronic, 'ion': converged_ionic}
+    """
+    try:
+        vr = Vasprun(f'{outdir}/vasprun.xml', parse_dos=False, parse_eigen=False,
+                   parse_potcar_file=False, exception_on_bad_xml=False)
+        conv_dict = {'elec': vr.converged_electronic, 'ion': vr.converged_ionic}
+        if verbose: print(f'{outdir}\t{conv_dict}')
+        return conv_dict
+    except:
+        conv_dict = {'elec': False, 'ion': False}
+        if verbose: print(f'{outdir}\t{conv_dict}\tException')
+        return conv_dict
 
 
 def make_primitive(struc_name):
