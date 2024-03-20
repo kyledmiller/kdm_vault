@@ -39,50 +39,6 @@ def sort_sites(struc, unwrap_tol=0.05):
     return Structure.from_sites([struc[i] for i in sorted_indices])
 
 
-def gen_mod_struc(phon_dir, labels, kpts, indices, disps, moddims):
-    """Generate a single modulated structure from a directory containing a 
-    complete phonopy calculation.
-    Args:
-        phon_dir (str): Path to phonopy directory
-        labels (list): List of labels for each modulation
-        kpts (list): List of k-points for each modulation
-        indices (list): List of indices for each modulation
-        disps (list): List of displacements for each modulation
-        moddims (list): List of modulation dimensions
-    Returns:
-        struc (Structure): Modulated structure
-        (str): Path to modulated structure directory
-    """
-    og_dir = os.getcwd()
-    mods = [f'{label}{index}' for label,index in zip(labels,indices)]
-    moddir = '/'.join(phon_dir.split('/')[:-1] + ['modulation'])
-    phon_tag = phon_dir.split('/')[-1] 
-    subdir = f'mod_{phon_tag}_{"_".join(mods)}'
-    os.makedirs(moddir, exist_ok=True)
-    os.chdir(moddir)
-    os.makedirs(subdir, exist_ok=True)
-    os.chdir(subdir)
-    ### Create modulation config file
-    with open('mod.conf', 'w+') as f:
-        shutil.copy(f'{phon_dir}/phonopy_disp.yaml', '.')
-        shutil.copy(f'{phon_dir}/FORCE_SETS', '.')
-        f.write('FC_SYMMETRY = .TRUE.\n')
-        moddim_str = " ".join([str(i) for i in moddims])
-        mod_line = f'MODULATION = {moddim_str}'
-        for kpt, index, disp in zip(kpts, indices, disps):
-            mod_line += f', {kpt} {index} {disp}'
-        f.write(mod_line)
-    ### Generate, reduce, and sort the modulated structure
-    os.system(f'phonopy mod.conf')
-    struc = Structure.from_file('MPOSCAR')
-    sga = SpacegroupAnalyzer(struc, symprec=1E-4)
-    print(f'{subdir},  SG = {sga.get_space_group_symbol()} ({sga.get_space_group_number()})')
-    struc = sga.get_primitive_standard_structure()
-    struc = sort_sites(struc)
-    os.chdir(og_dir)
-    return struc, f'{moddir}/{subdir}'
-
-
 def check_symmetry(struc):
     print("Prec \tAngle_tol \tSG Sym\tSG Num")
     for tol, angle_tol in [(0.000001, 0.01), (0.00001, 0.1), (0.0001, 0.1), (0.0001, 1), (0.001, 2), (0.01, 5), (0.1, 5), (1,5)]:
@@ -158,9 +114,10 @@ def path2name(path):
     return path.split('/')[-1]
 
 
-def exec_parallel(func, args, multi_arg=False, verbose=False):
+def exec_parallel(func, args, multi_arg=False, verbose=False, nproc:int=0):
     if verbose: start = time.time()
-    with mp.Pool(processes=mp.cpu_count()-1) as pool:
+    if nproc < 1: nproc = mp.cpu_count() - nproc
+    with mp.Pool(processes=nproc) as pool:
         if multi_arg:  results = pool.starmap(func, args)
         else:          results = pool.map(func, args)
     if verbose: print(f'{func.__name__}: {timedelta(seconds=(time.time()-start))}')
